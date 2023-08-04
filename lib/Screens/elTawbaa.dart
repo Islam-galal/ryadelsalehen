@@ -1,18 +1,65 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../Widgets/TextButton.dart';
 import 'elSabrr.dart';
 import 'elakhlass.dart';
 
-class ElTawbaa extends StatelessWidget {
+class ElTawbaa extends StatefulWidget {
+  String id = 'ElTawbaa';
    ElTawbaa({super.key});
 
-  String id = 'ElTawbaa';
+  @override
+  State<ElTawbaa> createState() => _ElTawbaaState();
+}
+
+class _ElTawbaaState extends State<ElTawbaa> {
+
+  late PdfViewerController _pdfViewerController;
+  OverlayEntry? _overlayEntry;
 
   double boxsize = 1.0;
+
   double boxsizeheader = 35;
+
+  @override
+  void initState() {
+    _pdfViewerController = PdfViewerController();
+    super.initState();
+  }
+
+  void _showContextMenu(
+      BuildContext context, PdfTextSelectionChangedDetails details) {
+    final OverlayState _overlayState = Overlay.of(context)!;
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: details.globalSelectedRegion!.center.dy - 75,
+        left: details.globalSelectedRegion!.bottomLeft.dx,
+        child: TextButton(
+          onPressed: () {
+            Clipboard.setData(ClipboardData(text: details.selectedText.toString()));
+            print(
+                'Text copied to clipboardssssssssssss: ' + details.selectedText.toString());
+            _pdfViewerController.clearSelection();
+            setState(() {
+
+            });
+          },
+          child: Text('Copy',
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              )),
+        ),
+      ),
+    );
+    _overlayState.insert(_overlayEntry!);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -272,7 +319,18 @@ class ElTawbaa extends StatelessWidget {
           ),
 
         ),
-        body: SfPdfViewer.network('https://www.vssut.ac.in/lecture_notes/lecture1423905560.pdf'),
+        body: SfPdfViewer.network('https://www.vssut.ac.in/lecture_notes/lecture1423905560.pdf',
+          enableTextSelection: true,
+          onTextSelectionChanged: (PdfTextSelectionChangedDetails details) {
+            if (details.selectedText == null && _overlayEntry != null) {
+              _overlayEntry!.remove();
+              _overlayEntry = null;
+            } else if (details.selectedText != null && _overlayEntry == null) {
+              _showContextMenu(context, details);
+
+            }
+          },
+          controller: _pdfViewerController,),
         // body: SfPdfViewer.asset('images/elsalehen2.pdf'),
       ),
     );
