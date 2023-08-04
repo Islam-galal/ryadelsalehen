@@ -39,19 +39,18 @@ class _ElAkhlassState extends State<ElAkhlass> {
           onPressed: () {
             Clipboard.setData(ClipboardData(text: details.selectedText.toString()));
             print(
-                'Text copied to clipboard: ' + details.selectedText.toString());
+                'Text copied to clipboardssssssssssss: ' + details.selectedText.toString());
             _pdfViewerController.clearSelection();
-            initState();
+            setState(() {
+
+            });
           },
-          child: Container(
-            color: Colors.red,
-            child: Text('Copy',
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                )),
-          ),
+          child: Text('Copy',
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              )),
         ),
       ),
     );
@@ -311,17 +310,15 @@ class _ElAkhlassState extends State<ElAkhlass> {
             ],
           ),
         ),
-        body: SfPdfViewer.network('https://www.vssut.ac.in/lecture_notes/lecture1423905560.pdf',
+        body: SfPdfViewer.asset('images/elsalehen2.pdf',
           enableTextSelection: true,
           onTextSelectionChanged: (PdfTextSelectionChangedDetails details) {
-            if (details.selectedText == null && _overlayEntry == null) {
+            if (details.selectedText == null && _overlayEntry != null) {
               _overlayEntry!.remove();
               _overlayEntry = null;
-              initState();
             } else if (details.selectedText != null && _overlayEntry == null) {
               _showContextMenu(context, details);
 
-              initState();
             }
           },
           controller: _pdfViewerController,
