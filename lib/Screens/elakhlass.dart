@@ -16,6 +16,7 @@ class ElAkhlass extends StatefulWidget {
 
 class _ElAkhlassState extends State<ElAkhlass> {
   late PdfViewerController _pdfViewerController;
+  late PdfTextSearchResult _searchResult;
   OverlayEntry? _overlayEntry;
 
   double boxsize = 1.0;
@@ -25,6 +26,7 @@ class _ElAkhlassState extends State<ElAkhlass> {
   @override
   void initState() {
     _pdfViewerController = PdfViewerController();
+    _searchResult = PdfTextSearchResult();
     super.initState();
   }
 
@@ -37,13 +39,12 @@ class _ElAkhlassState extends State<ElAkhlass> {
         left: details.globalSelectedRegion!.bottomLeft.dx,
         child: TextButton(
           onPressed: () {
-            Clipboard.setData(ClipboardData(text: details.selectedText.toString()));
-            print(
-                'Text copied to clipboardssssssssssss: ' + details.selectedText.toString());
+            Clipboard.setData(
+                ClipboardData(text: details.selectedText.toString()));
+            print('Text copied to clipboardssssssssssss: ' +
+                details.selectedText.toString());
             _pdfViewerController.clearSelection();
-            setState(() {
-
-            });
+            setState(() {});
           },
           child: Text('Copy',
               style: TextStyle(
@@ -62,7 +63,6 @@ class _ElAkhlassState extends State<ElAkhlass> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-
           backgroundColor: Colors.green,
           title: Center(
             child: Text(
@@ -111,6 +111,7 @@ class _ElAkhlassState extends State<ElAkhlass> {
                           SizedBox(
                             width: boxsizeheader,
                           ),
+
                         ],
                       ),
                     ),
@@ -310,19 +311,38 @@ class _ElAkhlassState extends State<ElAkhlass> {
             ],
           ),
         ),
-        body: SfPdfViewer.asset('images/elsalehen2.pdf',
+        body: SfPdfViewer.asset(
+          'images/elsalehen2.pdf',
           enableTextSelection: true,
+
+            currentSearchTextHighlightColor: Colors.yellow.withOpacity(0.6),
+            otherSearchTextHighlightColor: Colors.yellow.withOpacity(0.3),
           onTextSelectionChanged: (PdfTextSelectionChangedDetails details) {
             if (details.selectedText == null && _overlayEntry != null) {
               _overlayEntry!.remove();
               _overlayEntry = null;
             } else if (details.selectedText != null && _overlayEntry == null) {
               _showContextMenu(context, details);
-
             }
           },
           controller: _pdfViewerController,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
 
+            var TextSearchOption;
+            _searchResult = _pdfViewerController.searchText('the',
+                searchOption: TextSearchOption.caseSensitive);
+            _searchResult.addListener((){
+              if (_searchResult.hasResult) {
+                setState(() {});
+              }
+            });
+
+          },
+
+          backgroundColor: Colors.green,
+          child: Icon(Icons.search),
         ),
       ),
     );
