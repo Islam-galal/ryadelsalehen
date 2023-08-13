@@ -48,14 +48,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/elsaleheen1.pdf
-    - images/elsalehen2.pdf
-    - images/1024.jpeg
-    - images/01 باب الإخلاص وإحضار النية- دليل المعاصرين.pdf
-    - images/02 باب التوبة- دليل المعاصرين.pdf
-    - images/03 باب الصبر- دليل المعاصرين.pdf
-    - images/eng.lecture.pdf
-    - images/00 مقدمة الإمام النووي- دليل المعاصرين.pdf
-    - images/دليل المعاصرين_ الطبعة الرابعة_ تنسيق نهائي.pdf
+    - images/
+
 
 

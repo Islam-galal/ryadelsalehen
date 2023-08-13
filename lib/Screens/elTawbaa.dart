@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../Widgets/TextButton.dart';
 import 'elSabrr.dart';
-import 'elakhlass.dart';
+import 'HomePage.dart';
 
 class ElTawbaa extends StatefulWidget {
   String id = 'ElTawbaa';
@@ -127,7 +127,7 @@ class _ElTawbaaState extends State<ElTawbaa> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, ElAkhlass().id);
+                      Navigator.pushNamed(context, HomePage().id);
                     },
                     child: Container(
                       decoration: BoxDecoration(

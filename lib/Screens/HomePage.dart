@@ -1,55 +1,85 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:flutter/services.dart';
+import 'package:ryadelsalehen/Screens/elSabrr.dart';
+import 'package:ryadelsalehen/Screens/elTawbaa.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-import 'elSabrr.dart';
-import 'elakhlass.dart';
+import '../Widgets/TextButton.dart';
+import 'chapters.dart';
 
-class HomePage extends StatelessWidget {
-   HomePage({this.pageName});
+class HomePage extends StatefulWidget {
+  String id = 'HomePage';
+  HomePage();
 
-   String id = 'HomePage';
-
-  String ? pageName;
-   double boxsize = 1.0;
-
-   double boxsizeheader = 35;
-
-   late PdfViewerController _pdfViewerController;
-   late PdfTextSearchResult _searchResult;
-   OverlayEntry? _overlayEntry;
-
-
-   void _showContextMenu(
-       BuildContext context, PdfTextSelectionChangedDetails details) {
-     final OverlayState _overlayState = Overlay.of(context)!;
-     _overlayEntry = OverlayEntry(
-       builder: (context) => Positioned(
-         top: details.globalSelectedRegion!.center.dy - 75,
-         left: details.globalSelectedRegion!.bottomLeft.dx,
-         child: TextButton(
-           onPressed: () {
-             Clipboard.setData(
-                 ClipboardData(text: details.selectedText.toString()));
-             print('Text copied to clipboardssssssssssss: ' +
-                 details.selectedText.toString());
-             _pdfViewerController.clearSelection();
-           },
-           child: Text('Copy',
-               style: TextStyle(
-                 fontSize: 25,
-                 color: Colors.black,
-                 fontWeight: FontWeight.bold,
-               )),
-         ),
-       ),
-     );
-     _overlayState.insert(_overlayEntry!);
-   }
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late PdfViewerController _pdfViewerController;
+  late PdfTextSearchResult _searchResult;
+  OverlayEntry? _overlayEntry;
+  int _selectedIndex = 0-1;
+
+  late TextEditingController textController;
+
+  double boxsize = 1.0;
+
+  double boxsizeheader = 35;
+
+  @override
+  void initState() {
+    _pdfViewerController = PdfViewerController();
+    _searchResult = PdfTextSearchResult();
+    textController = TextEditingController();
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
+  void _showContextMenu(
+      BuildContext context, PdfTextSelectionChangedDetails details) {
+    final OverlayState _overlayState = Overlay.of(context)!;
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: details.globalSelectedRegion!.center.dy - 75,
+        left: details.globalSelectedRegion!.bottomLeft.dx,
+        child: TextButton(
+          onPressed: () {
+            Clipboard.setData(
+                ClipboardData(text: details.selectedText.toString()));
+            print('Text copied to clipboardssssssssssss: ' +
+                details.selectedText.toString());
+            _pdfViewerController.clearSelection();
+            setState(() {});
+          },
+          child: Text('Copy',
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              )),
+        ),
+      ),
+    );
+    _overlayState.insert(_overlayEntry!);
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      _pdfViewerController.jumpToPage(getPageNumbers(index));
+    });
+  }
+  @override
   Widget build(BuildContext context) {
-    return  SafeArea(
+    return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
@@ -64,188 +94,49 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        endDrawer: Drawer(
-          child: ListView(
-            children: [
-              Container(
-                height: 75,
-                child: DrawerHeader(
-                  decoration: BoxDecoration(color: Colors.green),
-                  child: Center(
-                    child: SingleChildScrollView(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Column(
-                            children: [
-                              Icon(Icons.room_preferences),
-                              Text('المرجعيات'),
-                            ],
-                          ),
-                          SizedBox(
-                            width: boxsizeheader,
-                          ),
-                          Column(
-                            children: [
-                              Icon(Icons.note_alt_sharp),
-                              Text('الملاحظات'),
-                            ],
-                          ),
-                          SizedBox(
-                            width: boxsizeheader,
-                          ),
-                          Column(
-                            children: [Icon(Icons.ac_unit), Text('الاجزاء')],
-                          ),
-                          SizedBox(
-                            width: boxsizeheader,
-                          ),
-
-                        ],
-                      ),
+        endDrawer: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Drawer(
+            child: ListView.separated(
+              padding: EdgeInsets.only(left: 10, top: 0, right: 10),
+              itemCount: getChapterNumbers(),
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  padding: EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                      color: Colors.blue.shade100,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40))),
+                  child: ListTile(
+                    title: Text(
+                      '${index + 1} - ' +
+                          '${getChapterName()[index].toString()}',
+                      style: TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold),
                     ),
-                  ),
-                ),
-              ),
-              ListView(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                children: [
-                  TextButton(
-                    onPressed: () {
-
-                      pageName = "images/01 باب الإخلاص وإحضار النية- دليل المعاصرين.pdf";
-                      Navigator.pushNamed(context, ElAkhlass().id);
+                    selected: _selectedIndex == index,
+                    onTap: () {
+                      // Update the state of the app
+                      _onItemTapped(index);
+                      // Then close the drawer
+                      Navigator.pop(context);
                     },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      width: double.infinity,
-                      height: 60,
-                      child: Center(
-                        child: Text(
-                          'الإخـــــــــــــــلاصُ',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
-                  SizedBox(
-                    height: boxsize,
-                  ),
-                  TextButton(
-                    onPressed: () {
-
-                      pageName = 'images/02 باب التوبة- دليل المعاصرين.pdf';
-
-                      Navigator.pushNamed(context, ElAkhlass().id);
-
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      width: double.infinity,
-                      height: 60,
-                      child: Center(
-                        child: Text(
-                          'التوبة',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: boxsize,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, ElSabr().id);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      width: double.infinity,
-                      height: 60,
-                      child: Center(
-                        child: Text(
-                          'الصبرُ',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: boxsize,
-                  ),
-                  TextButton(
-                    onPressed: () {
-
-                      Navigator.pushNamed(context, ElSabr().id);
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      width: double.infinity,
-                      height: 60,
-                      child: Center(
-                        child: Text(
-                          'Test',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
-              // FutureBuilder<List<Map<String, dynamic>>>(
-              //   builder: (context, snapshot) {
-              //     if (!snapshot.hasData) {
-              //       return const Center(child: CircularProgressIndicator());
-              //     }
-              //     final data = snapshot.data!;
-              //     return ListView.builder(
-              //       itemCount: data.length,
-              //       itemBuilder: ((context, index) {
-              //         final sections_data = data[index];
-              //         return Expanded(child: ButtonField(text: sections_data['sections']));
-              //       }),
-              //     );
-              //   },
-              // ),
-            ],
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
+            ),
           ),
         ),
         body: SfPdfViewer.asset(
-          pageName!,
+          'images/${_selectedIndex + 1}.pdf',
+          //key: _pdfViewerKey,
           enableTextSelection: true,
-
-          currentSearchTextHighlightColor: Colors.yellow.withOpacity(0.6),
-          otherSearchTextHighlightColor: Colors.yellow.withOpacity(0.3),
+          currentSearchTextHighlightColor: Colors.blue.withOpacity(0.6),
+          otherSearchTextHighlightColor: Colors.blue.withOpacity(0.3),
           onTextSelectionChanged: (PdfTextSelectionChangedDetails details) {
             if (details.selectedText == null && _overlayEntry != null) {
               _overlayEntry!.remove();
@@ -258,22 +149,76 @@ class HomePage extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
+            // openDialog();
+
+            // int customerPageSelected = openDialog();
+
+            // if(customerPageSelected == null )
+            //   return;
+            //
+            // setState(() {
+            //   // this.customerPageselected = customerPageSelected;
+            // });
+
+            // _pdfViewerController.jumpToPage(customerPageSelected);
+
+            // search method
 
             var TextSearchOption;
-            _searchResult = _pdfViewerController.searchText('the',
-                searchOption: TextSearchOption.caseSensitive);
+            _searchResult = _pdfViewerController.searchText('الصالحين',
+                searchOption: TextSearchOption);
             _searchResult.addListener((){
               if (_searchResult.hasResult) {
-
+                setState(() {});
               }
             });
-
           },
-
           backgroundColor: Colors.green,
           child: Icon(Icons.search),
         ),
       ),
-    );;
+    );
+  }
+
+  int getCustomerPageNumber(int pageNumber) {
+    int customerPgaeNumber = pageNumber;
+
+    return customerPgaeNumber;
+  }
+
+  int openDialog() {
+    var pageNumber;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Enter Page Number'),
+        content: TextField(
+          onChanged: (data){
+            pageNumber = data;
+          },
+          keyboardType: TextInputType.number,
+
+          autofocus: true,
+          decoration: InputDecoration(
+            hintText: 'Enter Here your Page Number',
+
+          ),
+        ),
+        actions: [
+          TextButton(
+            child: Text('Ok'),
+            onPressed: (){
+
+
+              submit();
+            }),
+        ],
+      ),
+    );
+    return pageNumber!;
+  }
+
+  void submit() {
+    Navigator.of(context).pop(textController.text);
   }
 }

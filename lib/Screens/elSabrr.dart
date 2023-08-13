@@ -4,7 +4,7 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../Widgets/TextButton.dart';
 import 'elTawbaa.dart';
-import 'elakhlass.dart';
+import 'HomePage.dart';
 
 class ElSabr extends StatelessWidget {
    ElSabr({super.key});
@@ -81,9 +81,7 @@ class ElSabr extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return HomePage(pageName: 'images/01 باب الإخلاص وإحضار النية- دليل المعاصرين.pdf',);
-                      }));
+                      Navigator.pushNamed(context, HomePage().id);
                       // Navigator.pushNamed(context, HomePage(pageName: 'images/01 باب الإخلاص وإحضار النية- دليل المعاصرين.pdf',).id);
                     },
                     child: Container(
@@ -110,7 +108,7 @@ class ElSabr extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, HomePage(pageName: 'images/02 باب التوبة- دليل المعاصرين.pdf',).id);
+                      Navigator.pushNamed(context, HomePage().id);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -136,7 +134,7 @@ class ElSabr extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, HomePage(pageName: 'images/03 باب الصبر- دليل المعاصرين.pdf',).id);
+                      Navigator.pushNamed(context, HomePage().id);
                     },
                     child: Container(
                       decoration: BoxDecoration(

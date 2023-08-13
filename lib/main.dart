@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ryadelsalehen/Screens/HomePage.dart';
 import 'package:ryadelsalehen/Screens/elSabrr.dart';
 import 'package:ryadelsalehen/Screens/elTawbaa.dart';
-import 'package:ryadelsalehen/Screens/elakhlass.dart';
+import 'package:ryadelsalehen/Screens/HomePage.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import 'Widgets/TextButton.dart';
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        ElAkhlass().id : (context) => ElAkhlass(),
+        HomePage().id : (context) => HomePage(),
         ElTawbaa().id : (context) => ElTawbaa(),
         ElSabr().id : (context) => ElSabr(),
         HomePage().id : (context)=> HomePage(),
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
 
       },
       debugShowCheckedModeBanner: false,
-      initialRoute: "ElAkhlass",
+      initialRoute: "HomePage",
     );
   }
 }
