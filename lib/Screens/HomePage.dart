@@ -1,68 +1,55 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:flutter/services.dart';
 
-import '../Widgets/TextButton.dart';
 import 'elSabrr.dart';
 import 'elakhlass.dart';
 
-class ElTawbaa extends StatefulWidget {
-  String id = 'ElTawbaa';
-   ElTawbaa({super.key});
+class HomePage extends StatelessWidget {
+   HomePage({this.pageName});
 
-  @override
-  State<ElTawbaa> createState() => _ElTawbaaState();
-}
+   String id = 'HomePage';
 
-class _ElTawbaaState extends State<ElTawbaa> {
+  String ? pageName;
+   double boxsize = 1.0;
 
-  late PdfViewerController _pdfViewerController;
-  OverlayEntry? _overlayEntry;
+   double boxsizeheader = 35;
 
-  double boxsize = 1.0;
+   late PdfViewerController _pdfViewerController;
+   late PdfTextSearchResult _searchResult;
+   OverlayEntry? _overlayEntry;
 
-  double boxsizeheader = 35;
 
-  @override
-  void initState() {
-    _pdfViewerController = PdfViewerController();
-    super.initState();
-  }
-
-  void _showContextMenu(
-      BuildContext context, PdfTextSelectionChangedDetails details) {
-    final OverlayState _overlayState = Overlay.of(context)!;
-    _overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        top: details.globalSelectedRegion!.center.dy - 75,
-        left: details.globalSelectedRegion!.bottomLeft.dx,
-        child: TextButton(
-          onPressed: () {
-            Clipboard.setData(ClipboardData(text: details.selectedText.toString()));
-            print(
-                'Text copied to clipboardssssssssssss: ' + details.selectedText.toString());
-            _pdfViewerController.clearSelection();
-            setState(() {
-
-            });
-          },
-          child: Text('Copy',
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              )),
-        ),
-      ),
-    );
-    _overlayState.insert(_overlayEntry!);
-  }
-
+   void _showContextMenu(
+       BuildContext context, PdfTextSelectionChangedDetails details) {
+     final OverlayState _overlayState = Overlay.of(context)!;
+     _overlayEntry = OverlayEntry(
+       builder: (context) => Positioned(
+         top: details.globalSelectedRegion!.center.dy - 75,
+         left: details.globalSelectedRegion!.bottomLeft.dx,
+         child: TextButton(
+           onPressed: () {
+             Clipboard.setData(
+                 ClipboardData(text: details.selectedText.toString()));
+             print('Text copied to clipboardssssssssssss: ' +
+                 details.selectedText.toString());
+             _pdfViewerController.clearSelection();
+           },
+           child: Text('Copy',
+               style: TextStyle(
+                 fontSize: 25,
+                 color: Colors.black,
+                 fontWeight: FontWeight.bold,
+               )),
+         ),
+       ),
+     );
+     _overlayState.insert(_overlayEntry!);
+   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return  SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green,
@@ -113,20 +100,21 @@ class _ElTawbaaState extends State<ElTawbaa> {
                           SizedBox(
                             width: boxsizeheader,
                           ),
+
                         ],
                       ),
                     ),
                   ),
                 ),
-
               ),
               ListView(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-
                 children: [
                   TextButton(
                     onPressed: () {
+
+                      pageName = "images/01 باب الإخلاص وإحضار النية- دليل المعاصرين.pdf";
                       Navigator.pushNamed(context, ElAkhlass().id);
                     },
                     child: Container(
@@ -153,7 +141,11 @@ class _ElTawbaaState extends State<ElTawbaa> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, ElTawbaa().id);
+
+                      pageName = 'images/02 باب التوبة- دليل المعاصرين.pdf';
+
+                      Navigator.pushNamed(context, ElAkhlass().id);
+
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -200,104 +192,35 @@ class _ElTawbaaState extends State<ElTawbaa> {
                       ),
                     ),
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: boxsize,
-                   ),
-                  // ButtonField(
-                  //
-                  //   text: 'الصدقُ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'المُرَاقَبَةُ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'التَّقْوى',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: ' اليقينِ والتَّوكُّلِ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'المُرَاقَبَةُ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'الاستقامةُ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'المجاهدة',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'كَثْرةُ طُرُقِ الخيرِ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'الاقتصادُ في العبادةِ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'الرُّخَصُ الشرعيَّة: أحكامُها وضوابِطُها',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'السُّنَّة النبوية الشريفة',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'المُرَاقَبَةُ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'أقسام الحكم التكليفي للأمة',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+
+                      Navigator.pushNamed(context, ElSabr().id);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      width: double.infinity,
+                      height: 60,
+                      child: Center(
+                        child: Text(
+                          'Test',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
 
                 ],
-
-
               ),
               // FutureBuilder<List<Map<String, dynamic>>>(
               //   builder: (context, snapshot) {
@@ -314,25 +237,43 @@ class _ElTawbaaState extends State<ElTawbaa> {
               //     );
               //   },
               // ),
-
             ],
           ),
-
         ),
-        body: SfPdfViewer.asset('images/02 باب التوبة- دليل المعاصرين.pdf',
+        body: SfPdfViewer.asset(
+          pageName!,
           enableTextSelection: true,
+
+          currentSearchTextHighlightColor: Colors.yellow.withOpacity(0.6),
+          otherSearchTextHighlightColor: Colors.yellow.withOpacity(0.3),
           onTextSelectionChanged: (PdfTextSelectionChangedDetails details) {
             if (details.selectedText == null && _overlayEntry != null) {
               _overlayEntry!.remove();
               _overlayEntry = null;
             } else if (details.selectedText != null && _overlayEntry == null) {
               _showContextMenu(context, details);
-
             }
           },
-          controller: _pdfViewerController,),
-        // body: SfPdfViewer.asset('images/elsalehen2.pdf'),
+          controller: _pdfViewerController,
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+
+            var TextSearchOption;
+            _searchResult = _pdfViewerController.searchText('the',
+                searchOption: TextSearchOption.caseSensitive);
+            _searchResult.addListener((){
+              if (_searchResult.hasResult) {
+
+              }
+            });
+
+          },
+
+          backgroundColor: Colors.green,
+          child: Icon(Icons.search),
+        ),
       ),
-    );
+    );;
   }
 }

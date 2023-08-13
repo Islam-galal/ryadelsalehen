@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ryadelsalehen/Screens/HomePage.dart';
 import 'package:ryadelsalehen/Screens/elSabrr.dart';
 import 'package:ryadelsalehen/Screens/elTawbaa.dart';
 import 'package:ryadelsalehen/Screens/elakhlass.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         ElAkhlass().id : (context) => ElAkhlass(),
         ElTawbaa().id : (context) => ElTawbaa(),
         ElSabr().id : (context) => ElSabr(),
+        HomePage().id : (context)=> HomePage(),
 
 
       },

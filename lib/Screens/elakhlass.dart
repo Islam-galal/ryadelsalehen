@@ -8,7 +8,7 @@ import '../Widgets/TextButton.dart';
 
 class ElAkhlass extends StatefulWidget {
   String id = 'ElAkhlass';
-  ElAkhlass({super.key});
+  ElAkhlass();
 
   @override
   State<ElAkhlass> createState() => _ElAkhlassState();
@@ -19,6 +19,8 @@ class _ElAkhlassState extends State<ElAkhlass> {
   late PdfTextSearchResult _searchResult;
   OverlayEntry? _overlayEntry;
 
+  late TextEditingController textController;
+
   double boxsize = 1.0;
 
   double boxsizeheader = 35;
@@ -27,7 +29,15 @@ class _ElAkhlassState extends State<ElAkhlass> {
   void initState() {
     _pdfViewerController = PdfViewerController();
     _searchResult = PdfTextSearchResult();
+    textController = TextEditingController();
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
   }
 
   void _showContextMenu(
@@ -111,7 +121,6 @@ class _ElAkhlassState extends State<ElAkhlass> {
                           SizedBox(
                             width: boxsizeheader,
                           ),
-
                         ],
                       ),
                     ),
@@ -150,7 +159,9 @@ class _ElAkhlassState extends State<ElAkhlass> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, ElTawbaa().id);
+                      setState(() {});
+                      Navigator.pushNamed(context, ElAkhlass().id);
+                      setState(() {});
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -197,100 +208,32 @@ class _ElAkhlassState extends State<ElAkhlass> {
                       ),
                     ),
                   ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'الصدقُ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'المُرَاقَبَةُ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'التَّقْوى',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: ' اليقينِ والتَّوكُّلِ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'المُرَاقَبَةُ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'الاستقامةُ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //
-                  //   text: 'المجاهدة',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'كَثْرةُ طُرُقِ الخيرِ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'الاقتصادُ في العبادةِ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'الرُّخَصُ الشرعيَّة: أحكامُها وضوابِطُها',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'السُّنَّة النبوية الشريفة',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'المُرَاقَبَةُ',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
-                  // ButtonField(
-                  //   onPressed: (){},
-                  //   text: 'أقسام الحكم التكليفي للأمة',
-                  // ),
-                  // SizedBox(
-                  //   height: boxsize,
-                  // ),
+                  SizedBox(
+                    height: boxsize,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, ElSabr().id);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      width: double.infinity,
+                      height: 60,
+                      child: Center(
+                        child: Text(
+                          'Test',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               // FutureBuilder<List<Map<String, dynamic>>>(
@@ -312,11 +255,10 @@ class _ElAkhlassState extends State<ElAkhlass> {
           ),
         ),
         body: SfPdfViewer.asset(
-          'images/elsalehen2.pdf',
+          'images/دليل المعاصرين_ الطبعة الرابعة_ تنسيق نهائي.pdf',
           enableTextSelection: true,
-
-            currentSearchTextHighlightColor: Colors.yellow.withOpacity(0.6),
-            otherSearchTextHighlightColor: Colors.yellow.withOpacity(0.3),
+          currentSearchTextHighlightColor: Colors.blue.withOpacity(0.6),
+          otherSearchTextHighlightColor: Colors.blue.withOpacity(0.3),
           onTextSelectionChanged: (PdfTextSelectionChangedDetails details) {
             if (details.selectedText == null && _overlayEntry != null) {
               _overlayEntry!.remove();
@@ -329,22 +271,76 @@ class _ElAkhlassState extends State<ElAkhlass> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
+            openDialog();
 
-            var TextSearchOption;
-            _searchResult = _pdfViewerController.searchText('the',
-                searchOption: TextSearchOption.caseSensitive);
-            _searchResult.addListener((){
-              if (_searchResult.hasResult) {
-                setState(() {});
-              }
+            int customerPageSelected = openDialog();
+
+            if(customerPageSelected == null )
+              return;
+
+            setState(() {
+              // this.customerPageselected = customerPageSelected;
             });
 
-          },
+            _pdfViewerController.jumpToPage(customerPageSelected);
 
+            // search method
+
+            // var TextSearchOption;
+            // _searchResult = _pdfViewerController.searchText('hi',
+            //     searchOption: TextSearchOption);
+            // _searchResult.addListener((){
+            //   if (_searchResult.hasResult) {
+            //     setState(() {});
+            //   }
+            // });
+          },
           backgroundColor: Colors.green,
           child: Icon(Icons.search),
         ),
       ),
     );
+  }
+
+  int getCustomerPageNumber(int pageNumber) {
+    int customerPgaeNumber = pageNumber;
+
+    return customerPgaeNumber;
+  }
+
+  int openDialog() {
+    var pageNumber;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Enter Page Number'),
+        content: TextField(
+          onChanged: (data){
+            pageNumber = data;
+          },
+          keyboardType: TextInputType.number,
+
+          autofocus: true,
+          decoration: InputDecoration(
+            hintText: 'Enter Here your Page Number',
+
+          ),
+        ),
+        actions: [
+          TextButton(
+            child: Text('Ok'),
+            onPressed: (){
+
+
+              submit();
+            }),
+        ],
+      ),
+    );
+    return pageNumber!;
+  }
+
+  void submit() {
+    Navigator.of(context).pop(textController.text);
   }
 }

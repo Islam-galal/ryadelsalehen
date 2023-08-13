@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ryadelsalehen/Screens/HomePage.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../Widgets/TextButton.dart';
@@ -80,7 +81,10 @@ class ElSabr extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, ElAkhlass().id);
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return HomePage(pageName: 'images/01 باب الإخلاص وإحضار النية- دليل المعاصرين.pdf',);
+                      }));
+                      // Navigator.pushNamed(context, HomePage(pageName: 'images/01 باب الإخلاص وإحضار النية- دليل المعاصرين.pdf',).id);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -106,7 +110,7 @@ class ElSabr extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, ElTawbaa().id);
+                      Navigator.pushNamed(context, HomePage(pageName: 'images/02 باب التوبة- دليل المعاصرين.pdf',).id);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -132,7 +136,7 @@ class ElSabr extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, ElSabr().id);
+                      Navigator.pushNamed(context, HomePage(pageName: 'images/03 باب الصبر- دليل المعاصرين.pdf',).id);
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -272,7 +276,7 @@ class ElSabr extends StatelessWidget {
           ),
 
         ),
-        body: SfPdfViewer.asset('images/elsalehen2.pdf'),
+        body: SfPdfViewer.asset('images/00 مقدمة الإمام النووي- دليل المعاصرين.pdf'),
       ),
     );
   }
