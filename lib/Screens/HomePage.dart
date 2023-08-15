@@ -1,8 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ryadelsalehen/Screens/elSabrr.dart';
 import 'package:ryadelsalehen/Screens/elTawbaa.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pdf_document/pdf_document.dart';
+import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pdf_document/outlines/pdf_outline.dart';
+import 'package:syncfusion_flutter_pdf/src/pdf/implementation/general/pdf_destination.dart';
+import 'package:syncfusion_flutter_pdf/src/pdf/implementation/graphics/pdf_color.dart';
+import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pdf_document/outlines/enums.dart';
 
 import '../Widgets/TextButton.dart';
 import 'chapters.dart';
@@ -17,8 +24,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
+  final GlobalKey<SfPdfViewerState> _pdfviewerStatekey = GlobalKey();
   late PdfViewerController _pdfViewerController;
+  late PdfBookmark _pdfBookmark;
   late PdfTextSearchResult _searchResult;
+
   OverlayEntry? _overlayEntry;
   int _selectedIndex = 0-1;
 
@@ -42,6 +53,8 @@ class _HomePageState extends State<HomePage> {
     textController.dispose();
     super.dispose();
   }
+
+
 
   void _showContextMenu(
       BuildContext context, PdfTextSelectionChangedDetails details) {
@@ -82,7 +95,25 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.lightBlue,
+          leading: IconButton(onPressed: () async {
+
+            PdfDocument document = PdfDocument(inputBytes: File('images/AllBook.pdf').readAsBytesSync());
+
+            PdfBookmark bookmark = document.bookmarks.add('Page 1');
+            bookmark.destination = PdfDestination(document.pages[0], Offset(20, 20));
+            // /Sets the bookmark color
+            bookmark.color = PdfColor(255, 0, 0);
+
+//Sets the text style
+            bookmark.textStyle = [PdfTextStyle.bold];
+
+//Saves the document
+            File('output.pdf').writeAsBytes(await document.save());
+
+//Disposes the document
+            document.dispose();
+          }, icon: Icon(Icons.bookmark_add)),
           title: Center(
             child: Text(
               'دليل الصالحين',
@@ -97,43 +128,156 @@ class _HomePageState extends State<HomePage> {
         endDrawer: Directionality(
           textDirection: TextDirection.rtl,
           child: Drawer(
-            child: ListView.separated(
-              padding: EdgeInsets.only(left: 10, top: 0, right: 10),
-              itemCount: getChapterNumbers(),
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  padding: EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                      color: Colors.blue.shade100,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40),
-                          bottomRight: Radius.circular(40))),
-                  child: ListTile(
-                    title: Text(
-                      '${index + 1} - ' +
-                          '${getChapterName()[index].toString()}',
-                      style: TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+
+                  Container(
+                    padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Divider(height: 30,),
+                        Container(
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              color: Colors.blue.shade100,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(40),
+                                  bottomRight: Radius.circular(40))),
+                          child: TextButton(
+                              onPressed: () {
+                                _pdfViewerController.jumpToPage(1019);
+                                // Then close the drawer
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'الفهرس',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              )),
+                        ),
+                        Divider(),
+                        Container(
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              color: Colors.blue.shade100,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(40),
+                                  bottomRight: Radius.circular(40))),
+                          child: TextButton(
+                              onPressed: () {
+                                _pdfviewerStatekey.currentState!.openBookmarkView();
+                                print(_pdfviewerStatekey.currentState);
+                                // _pdfViewerController.jumpToBookmark(_pdfBookmark);
+                                // Then close the drawer
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'الملاحظات',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              )),
+                        ),
+                        Divider(),
+                        Container(
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              color: Colors.blue.shade100,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(40),
+                                  bottomRight: Radius.circular(40))),
+                          child: TextButton(
+                              onPressed: () {
+                                _onItemTapped(377);
+                                // Then close the drawer
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                'نبذة عن الكتاب',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              )),
+                        ),
+                        Divider(),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+
+                              color: Colors.blue.shade100,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(40),
+                                  bottomRight: Radius.circular(40))),
+                          child: TextButton(
+                              onPressed: () {
+
+                              },
+                              child: Text(
+                                'اجزاء الكتاب :',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              )),
+                        ),
+                        Divider(),
+                      ],
                     ),
-                    selected: _selectedIndex == index,
-                    onTap: () {
-                      // Update the state of the app
-                      _onItemTapped(index);
-                      // Then close the drawer
-                      Navigator.pop(context);
-                    },
                   ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
-            ),
-          ),
+                  Expanded(
+                    child: ListView.separated(
+                      padding: EdgeInsets.only(left: 10, top: 0, right: 10),
+                      itemCount: getChapterNumbers(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          padding: EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                              color: Colors.blue.shade100,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(40),
+                                  bottomRight: Radius.circular(40))),
+                          child: ListTile(
+                            title: Text(
+                              '${index + 1} - ' +
+                                  '${getChapterName()[index].toString()}',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            selected: _selectedIndex == index,
+                            onTap: () {
+                              // Update the state of the app
+                              _onItemTapped(index);
+                              // Then close the drawer
+                              Navigator.pop(context);
+                            },
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) =>
+                      const Divider(),
+                    ),
+                  ),
+                ],
+              )),
         ),
         body: SfPdfViewer.asset(
-          'images/${_selectedIndex + 1}.pdf',
-          //key: _pdfViewerKey,
+          'images/AllBook.pdf',
+         key: _pdfviewerStatekey,
+          onDocumentLoaded:(PdfDocumentLoadedDetails details) {
+            // _pdfBookmark = details.document.bookmarks[0];
+          },
           enableTextSelection: true,
           currentSearchTextHighlightColor: Colors.blue.withOpacity(0.6),
           otherSearchTextHighlightColor: Colors.blue.withOpacity(0.3),
