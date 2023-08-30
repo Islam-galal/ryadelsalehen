@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ryadelsalehen/Screens/elSabrr.dart';
 import 'package:ryadelsalehen/Screens/elTawbaa.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pdf_document/pdf_document.dart';
 import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pdf_document/outlines/pdf_outline.dart';
@@ -24,6 +25,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int? pageNumber = 1;
   final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
   final GlobalKey<SfPdfViewerState> _pdfviewerStatekey = GlobalKey();
   late PdfViewerController _pdfViewerController;
@@ -63,21 +65,43 @@ class _HomePageState extends State<HomePage> {
       builder: (context) => Positioned(
         top: details.globalSelectedRegion!.center.dy - 75,
         left: details.globalSelectedRegion!.bottomLeft.dx,
-        child: TextButton(
-          onPressed: () {
-            Clipboard.setData(
-                ClipboardData(text: details.selectedText.toString()));
-            print('Text copied to clipboardssssssssssss: ' +
-                details.selectedText.toString());
-            _pdfViewerController.clearSelection();
-            setState(() {});
-          },
-          child: Text('Copy',
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              )),
+        child: Container(
+          color: Colors.grey.shade100,
+          child: Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  Clipboard.setData(
+                      ClipboardData(text: details.selectedText.toString().replaceAll("\n", "")));
+                  print('Text copied to clipboardssssssssssss: ' +
+                      details.selectedText.toString().replaceAll("\n", ""));
+                  _pdfViewerController.clearSelection();
+                  setState(() {});
+                },
+                child: Text('Copy',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              TextButton(
+                onPressed: () async {
+
+                  String appLink = 'https://www.youtube.com/watch?v=o09miTyQbPk';
+                await Share.share('hiiiiiiii \n\n$appLink');
+                  _pdfViewerController.clearSelection();
+                  setState(() {});
+                },
+                child: Text('Share',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -196,8 +220,7 @@ class _HomePageState extends State<HomePage> {
                                   bottomRight: Radius.circular(40))),
                           child: TextButton(
                               onPressed: () {
-                                _onItemTapped(377);
-                                // Then close the drawer
+                                _pdfViewerController.jumpToPage(17);
                                 Navigator.pop(context);
                               },
                               child: Text(
@@ -293,7 +316,8 @@ class _HomePageState extends State<HomePage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // openDialog();
+            // String customerSearchText = '';
+            // openDialog(customerSearchText);
 
             // int customerPageSelected = openDialog();
 
@@ -308,16 +332,18 @@ class _HomePageState extends State<HomePage> {
 
             // search method
 
-            var TextSearchOption;
-            _searchResult = _pdfViewerController.searchText('الصالحين',
-                searchOption: TextSearchOption);
-            _searchResult.addListener((){
-              if (_searchResult.hasResult) {
-                setState(() {});
-              }
-            });
+            // var TextSearchOption;
+            // _searchResult = _pdfViewerController.searchText('الصالحين',
+            //     searchOption: TextSearchOption);
+            // _searchResult.addListener((){
+            //   if (_searchResult.hasResult) {
+            //     setState(() {});
+            //   }
+            // });
+            openDialogToPage();
+
           },
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.lightBlue,
           child: Icon(Icons.search),
         ),
       ),
@@ -330,21 +356,20 @@ class _HomePageState extends State<HomePage> {
     return customerPgaeNumber;
   }
 
-  int openDialog() {
-    var pageNumber;
+  String openDialogToSearch(String searchText) {
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Enter Page Number'),
+        title: Text('اكتب رقم الصفحة'),
         content: TextField(
           onChanged: (data){
-            pageNumber = data;
+             searchText = data;
           },
-          keyboardType: TextInputType.number,
-
+          // keyboardType: TextInputType.number,
           autofocus: true,
           decoration: InputDecoration(
-            hintText: 'Enter Here your Page Number',
+            hintText: ' رقم الصفحة',
 
           ),
         ),
@@ -353,13 +378,44 @@ class _HomePageState extends State<HomePage> {
             child: Text('Ok'),
             onPressed: (){
 
-
               submit();
             }),
         ],
       ),
     );
-    return pageNumber!;
+    return searchText;
+  }
+
+  void openDialogToPage() {
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('اكتب رقم الصفحة'),
+        content: TextField(
+          keyboardType: TextInputType.number,
+          onChanged: ( data){
+            pageNumber = int.parse(data);
+
+          },
+          // keyboardType: TextInputType.number,
+          autofocus: true,
+          decoration: InputDecoration(
+            hintText: ' رقم الصفحة',
+
+          ),
+        ),
+        actions: [
+          TextButton(
+              child: Text('Ok'),
+              onPressed: (){
+                _pdfViewerController.jumpToPage(pageNumber!);
+                submit();
+              }),
+        ],
+      ),
+    );
+
   }
 
   void submit() {

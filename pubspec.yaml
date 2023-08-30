@@ -10,6 +10,7 @@ environment:
   sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
+  share_plus: ^7.1.0
   flutter_launcher_icons: ^0.13.1
   pdf: ^3.10.4
   syncfusion_flutter_pdfviewer: ^22.1.39
