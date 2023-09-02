@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:ryadelsalehen/Screens/Favorities.dart';
 import 'package:ryadelsalehen/Screens/HomePage.dart';
-import 'package:ryadelsalehen/Screens/elSabrr.dart';
-import 'package:ryadelsalehen/Screens/elTawbaa.dart';
-import 'package:ryadelsalehen/Screens/HomePage.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-import 'Widgets/TextButton.dart';
 
-void main() {
+void main() async{
+  await Hive.initFlutter();
+
+  var currentPageBox = await Hive.openBox('lastPage');
+
+  var bookMarkedBox = await Hive.openBox('bookMarked');
+
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -20,10 +24,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        // HomePage().id : (context) => HomePage(),
-        // ElTawbaa().id : (context) => ElTawbaa(),
-        // ElSabr().id : (context) => ElSabr(),
+
         HomePage().id : (context)=> HomePage(),
+        // Favorites().id : (context)=> Favorites(),
 
 
       },
