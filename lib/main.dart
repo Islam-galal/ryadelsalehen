@@ -7,17 +7,14 @@ import 'package:ryadelsalehen/Screens/HomePage.dart';
 
 void main() async{
   await Hive.initFlutter();
-
-  var currentPageBox = await Hive.openBox('lastPage');
-
   var bookMarkedBox = await Hive.openBox('bookMarked');
-
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp( MyApp(box: bookMarkedBox,));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  Box box;
+   MyApp({required this.box});
 
   // This widget is the root of your application.
   @override
@@ -25,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
 
-        HomePage().id : (context)=> HomePage(),
+        HomePage(box: box,).id : (context)=> HomePage(box: box,),
         // Favorites().id : (context)=> Favorites(),
 
 
