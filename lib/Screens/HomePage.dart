@@ -23,22 +23,16 @@ class HomePage extends StatefulWidget {
   String id = 'HomePage';
   Box box;
 
-  HomePage( {required this.box});
-
-
+  HomePage({required this.box});
 
   @override
-  State<HomePage> createState() => _HomePageState(ziad:box);
+  State<HomePage> createState() => _HomePageState(ziad: box);
 }
 
-class _HomePageState extends State<HomePage>    {
+class _HomePageState extends State<HomePage> {
+  late Box ziad;
 
-  late Box ziad ;
-
-
-  _HomePageState
-      ( {required this.ziad});
-
+  _HomePageState({required this.ziad});
 
   late String favoriteName;
 
@@ -47,7 +41,7 @@ class _HomePageState extends State<HomePage>    {
   int _boxLenght = 0;
 
   final String _bookmarkskey = 'Bookmark';
-  late var _getData ;
+  late var _getData;
   int pageNumber = 1;
   int lastPageViewed = 1;
   int originalSize = 800;
@@ -55,7 +49,7 @@ class _HomePageState extends State<HomePage>    {
   int _numberOfBookmarks = 0;
   double _zoom = 1;
 
-  late String _bookMarkCaption;
+  String _bookMarkCaption = null.toString();
   final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
   final GlobalKey<SfPdfViewerState> _pdfviewerStatekey = GlobalKey();
   late PdfViewerController _pdfViewerController;
@@ -69,7 +63,6 @@ class _HomePageState extends State<HomePage>    {
   late TextEditingController textController;
 
   double boxsize = 1.0;
-
 
   double boxsizeheader = 35;
 
@@ -185,12 +178,12 @@ class _HomePageState extends State<HomePage>    {
                 builder: (context) {
                   return IconButton(
                     icon: Icon(Icons.bookmark),
-                    onPressed: ()  async{
+                    onPressed: () async {
                       await Hive.initFlutter();
                       var box = await Hive.openBox(_bookmarkskey);
-                     setState(() {
-                       ziad = box;
-                     });
+                      setState(() {
+                        ziad = box;
+                      });
                       Scaffold.of(context).openDrawer();
                     },
                   );
@@ -209,156 +202,146 @@ class _HomePageState extends State<HomePage>    {
                   icon: Icon(Icons.share)),
             ],
           ),
-
           title: Container(
-            alignment: Alignment.center,
-
-            child: Text(
-              'دليل المعاصرين  في\nشرح رياض الصالحين',
-              style: TextStyle(
-
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ),
-        drawer: Drawer(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Divider(
-                        height: 30,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                            color: Colors.blue.shade100,
-                            shape: BoxShape.rectangle,
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(40),
-                                bottomRight: Radius.circular(40))),
-                        child: TextButton(
-                            onPressed: () {
-                              // Then close the drawer
-                              Navigator.pop(context);
-
-                              openDialogToBookmark();
-
-
-                            },
-                            child: const Text(
-                              'اضف الي المفضلات',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            )),
-                      ),
-                      const Divider(),
-
-                      Directionality(
-
-                        textDirection: TextDirection.rtl,
-                        child: Container(
-                          alignment: Alignment.centerRight,
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              color: Colors.blue.shade100,
-                              shape: BoxShape.rectangle,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(40),
-                                  bottomRight: Radius.circular(40))),
-                          child: TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                'قائمة المفضلات : ',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              )),
-                        ),
-                      ),
-                      const Divider(),
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5),
+                child: RichText(
+                  text: TextSpan(
+                    style: DefaultTextStyle.of(context).style,
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: '  دليل المعاصرين \n',
+                          style: TextStyle(fontSize: 22 , decoration: TextDecoration.none , color: Colors.white , fontWeight: FontWeight.bold , ) ),
+                      TextSpan(
+                          text: 'شرح رياض الصالحين',
+                          style: TextStyle(fontSize: 18 , decoration: TextDecoration.none , color: Colors.white))
                     ],
                   ),
                 ),
-                Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Expanded(
-                    child: ListView.separated(
-                      padding: const EdgeInsets.only(left: 10, top: 0, right: 10),
-                      itemCount: ziad.length ,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              color: Colors.blue.shade100,
-                              shape: BoxShape.rectangle,
-                              borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(40),
-                                  bottomRight: Radius.circular(40))),
-                          child: ListTile(
-                            onLongPress: (){
+              )),
+        ),
+        drawer: Drawer(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Divider(
+                    height: 30,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                        color: Colors.blue.shade200,
+                        shape: BoxShape.rectangle,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10))),
+                    child: TextButton(
+                        onPressed: () {
+                          // Then close the drawer
+                          Navigator.pop(context);
 
-                              openDialogToDeleteBookmark(index);
-
-
-                            },
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${index + 1} - ' +
-                                      'اسم المفضلة : ${ziad.getAt(index)[1]}',
-
-
-                                  style: const TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-
-                                      'رقم الصفحة : ${ziad.getAt(index)[2]}',
-
-
-                                  style: const TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-
-                                      'التاريخ :${ziad.getAt(index)[3]}',
-
-
-                                  style: const TextStyle(
-                                      fontSize: 15, fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            selected: _selectedIndex == index,
-                            onTap: () {
-                              // Update the state of the app
-                              _onItemFavoriteTapped(int.parse(ziad.getAt(index)[2]));
-
-                              // Then close the drawer
-                              Navigator.pop(context);
-                            },
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(),
+                          openDialogToBookmark();
+                        },
+                        child: const Text(
+                          'اضف الي المفضلات',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        )),
+                  ),
+                  const Divider(),
+                  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                          color: Colors.blue.shade200,
+                          shape: BoxShape.rectangle,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10))),
+                      child: TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'قائمة المفضلات : ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          )),
                     ),
                   ),
+                  const Divider(),
+                ],
+              ),
+            ),
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: Expanded(
+                child: ListView.separated(
+                  padding: const EdgeInsets.only(left: 10, top: 0, right: 10),
+                  itemCount: ziad.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                          color: Colors.blue.shade100,
+                          shape: BoxShape.rectangle,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(40),
+                              bottomRight: Radius.circular(40))),
+                      child: ListTile(
+                        onLongPress: () {
+                          openDialogToDeleteBookmark(index);
+                        },
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${index + 1} - ' +
+                                  'اسم المفضلة : ${ziad.getAt(index)[1]}',
+                              style: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'رقم الصفحة : ${ziad.getAt(index)[2]}',
+                              style: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              'التاريخ :${ziad.getAt(index)[3]}',
+                              style: const TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        selected: _selectedIndex == index,
+                        onTap: () {
+                          // Update the state of the app
+                          _onItemFavoriteTapped(
+                              int.parse(ziad.getAt(index)[2]));
+
+                          // Then close the drawer
+                          Navigator.pop(context);
+                        },
+                      ),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const Divider(),
                 ),
-              ],
-            )),
+              ),
+            ),
+          ],
+        )),
         endDrawer: Directionality(
           textDirection: TextDirection.rtl,
           child: Drawer(
@@ -373,38 +356,15 @@ class _HomePageState extends State<HomePage>    {
                     const Divider(
                       height: 30,
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                          color: Colors.blue.shade100,
-                          shape: BoxShape.rectangle,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40),
-                              bottomRight: Radius.circular(40))),
-                      child: TextButton(
-                          onPressed: () {
-                            _pdfViewerController.jumpToPage(1019);
-                            // Then close the drawer
-                            Navigator.pop(context);
-                          },
-                          child: const Text(
-                            'الفهرس',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          )),
-                    ),
 
-                    const Divider(),
                     Container(
                       padding: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
-                          color: Colors.blue.shade100,
+                          color: Colors.blue.shade200,
                           shape: BoxShape.rectangle,
                           borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40),
-                              bottomRight: Radius.circular(40))),
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10))),
                       child: TextButton(
                           onPressed: () {
                             _pdfViewerController.jumpToPage(17);
@@ -420,24 +380,28 @@ class _HomePageState extends State<HomePage>    {
                     ),
                     const Divider(),
                     Container(
-                      alignment: Alignment.centerRight,
                       padding: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
-                          color: Colors.blue.shade100,
+                          color: Colors.blue.shade200,
                           shape: BoxShape.rectangle,
                           borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40),
-                              bottomRight: Radius.circular(40))),
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10))),
                       child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _pdfViewerController.jumpToPage(1019);
+                            // Then close the drawer
+                            Navigator.pop(context);
+                          },
                           child: const Text(
-                            'اجزاء الكتاب :',
+                            'فهرس الموضوعات',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black),
                           )),
                     ),
+
                     const Divider(),
                   ],
                 ),
@@ -480,7 +444,6 @@ class _HomePageState extends State<HomePage>    {
           )),
         ),
         body: Stack(children: [
-
           Directionality(
             textDirection: TextDirection.ltr,
             child: Container(
@@ -523,56 +486,6 @@ class _HomePageState extends State<HomePage>    {
             ),
           ),
           Container(
-            alignment: Alignment.bottomCenter,
-            padding: EdgeInsets.only(bottom: 50),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // IconButton(
-                //     onPressed: () {
-                //       setState(() {
-                //         if (_zoom <= 1.3) {
-                //           _zoom += 0.1;
-                //           _pdfViewerController.zoomLevel = _zoom;
-                //         }
-                //       });
-                //     },
-                //     icon: Icon(
-                //       Icons.zoom_in,
-                //       size: 40,
-                //     )),
-
-                // IconButton(
-                //     onPressed: () {
-                //       setState(() {
-                //         if (_zoom >= 1) {
-                //           _zoom -= 0.1;
-                //           _pdfViewerController.zoomLevel = _zoom;
-                //         }
-                //       });
-                //     },
-                //     icon: Icon(
-                //       Icons.zoom_out,
-                //       size: 40,
-                //     )),
-                // Container(
-                //     padding: EdgeInsets.zero,
-                //     child: TextButton(
-                //       onPressed: () {
-                //         _pdfViewerController.jumpToPage(_currentPage);
-                //       },
-                //       child: Text('الذهاب الي اخر صفحه : $_currentPage'),
-                //     ))
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(2),
-            child: Row(
-              children: [],
-            ),
-          ),
-          Container(
             alignment: Alignment.centerLeft,
             child: IconButton(
                 onPressed: () {
@@ -585,6 +498,7 @@ class _HomePageState extends State<HomePage>    {
                 )),
           ),
           Container(
+            padding: EdgeInsets.only(right: 5),
             alignment: Alignment.centerRight,
             child: IconButton(
                 onPressed: () {
@@ -596,17 +510,15 @@ class _HomePageState extends State<HomePage>    {
                   color: Colors.lightBlue,
                 )),
           ),
-
         ]),
         floatingActionButton: FloatingActionButton(
-          onPressed: () async{
+          onPressed: () async {
             // getCurrentPageNumber();
             openDialogToPage();
             await Hive.initFlutter();
             var box = await Hive.openBox(_bookmarkskey);
-            for(int i = 0 ; i < box.length ; i++){
-             print(box.getAt(i));
-
+            for (int i = 0; i < box.length; i++) {
+              print(box.getAt(i));
             }
           },
           backgroundColor: Colors.lightBlue,
@@ -656,12 +568,16 @@ class _HomePageState extends State<HomePage>    {
         textDirection: TextDirection.rtl,
         child: AlertDialog(
           title: Text('هل تريد الاضافة الي المفضلة.؟'),
-          content: TextField(
+          content: TextFormField(
+            validator: (data) {
+              if (data!.isEmpty) {
+                return 'field is required';
+              }
+            },
             keyboardType: TextInputType.text,
             onChanged: (data) {
               _bookMarkCaption = data;
             },
-            // keyboardType: TextInputType.number,
             autofocus: true,
             decoration: InputDecoration(
               hintText: 'اضف عنوان',
@@ -674,22 +590,25 @@ class _HomePageState extends State<HomePage>    {
                 TextButton(
                     child: Text('نعم'),
                     onPressed: () async {
-                      await Hive.initFlutter();
-                      var box = await Hive.openBox(_bookmarkskey);
-
-                      saveIntegerToLocalStorage(
-                          _bookmarkskey, _numberOfBookmarks);
-                      _addBookMark(_bookMarkCaption, box);
-                      _numberOfBookmarks = _numberOfBookmarks + 1;
-
-                      submit();
+                      if (_bookMarkCaption != null.toString()) {
+                        await Hive.initFlutter();
+                        var box = await Hive.openBox(_bookmarkskey);
+                        saveIntegerToLocalStorage(
+                            _bookmarkskey, _numberOfBookmarks);
+                        _addBookMark(_bookMarkCaption, box);
+                        _numberOfBookmarks = _numberOfBookmarks + 1;
+                        submit();
+                      } else if (_bookMarkCaption == null.toString()) {
+                        var snackBar = SnackBar(
+                            content: Text(" برجاء ادخال اسم المفضلة."));
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
                     }),
                 TextButton(
                     child: Text('لا'),
-                    onPressed: ()  {
+                    onPressed: () {
                       submit();
-                    }
-                )
+                    })
               ],
             )
           ],
@@ -705,7 +624,6 @@ class _HomePageState extends State<HomePage>    {
         textDirection: TextDirection.rtl,
         child: AlertDialog(
           title: Text('هل تريد حذف المفضلة ؟'),
-
           actions: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -722,18 +640,14 @@ class _HomePageState extends State<HomePage>    {
                     }),
                 TextButton(
                     child: Text('لا'),
-                    onPressed: ()  {
+                    onPressed: () {
                       submit();
-                    }
-                )
+                    })
               ],
             ),
-
           ],
-
         ),
       ),
-
     );
   }
 
@@ -769,23 +683,22 @@ class _HomePageState extends State<HomePage>    {
     Navigator.of(context).pop(textController.text);
   }
 
-
   _addBookMark(String name, Box box) async {
-    List<String> newBookMark = [
-      (box.length + 1).toString(),
-      name,
-      _currentPage.toString(),
-      '${DateTime.now().year} - ${DateTime.now().month} - ${DateTime.now().day}'
-          .toString(),
-    ];
-    box.add(newBookMark);
+    if (name == null) {
+      print('Please adddddddddd name');
+    } else {
+      List<String> newBookMark = [
+        (box.length + 1).toString(),
+        name,
+        _currentPage.toString(),
+        '${DateTime.now().year} - ${DateTime.now().month} - ${DateTime.now().day}'
+            .toString(),
+      ];
+      box.add(newBookMark);
 
-    print('Info added to box!');
-    print(box.get(_bookmarkskey).toString());
-    _boxLenght = box.length;
+      print('Info added to box!');
+      print(box.get(_bookmarkskey).toString());
+      _boxLenght = box.length;
+    }
   }
-
-
-
-
 }

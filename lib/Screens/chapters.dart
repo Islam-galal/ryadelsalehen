@@ -1,6 +1,10 @@
+import 'dart:collection';
 import 'dart:ffi';
 
 int getChapterNumbers(){
+
+  var chaptersMap = new HashMap();
+  
 
   List<String> chapters =[
     "باب الإخلاص وإحضار النية"

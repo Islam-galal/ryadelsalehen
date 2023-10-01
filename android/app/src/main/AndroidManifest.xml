@@ -15,7 +15,7 @@
 
 
     <application
-        android:label="رياض الصالحين"
+        android:label="رياض الصالحين "
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
