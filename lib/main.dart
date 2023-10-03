@@ -13,24 +13,19 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-  Box box;
-   MyApp({required this.box});
+  final Box box;
+  MyApp({required this.box});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-
-        HomePage(box: box,).id : (context)=> HomePage(box: box,),
-        // Favorites().id : (context)=> Favorites(),
-
-
-      },
+      home: MySplashScreen(box: box),
       debugShowCheckedModeBanner: false,
-      initialRoute: "HomePage",
     );
   }
-}
+  }
+
+
 
 

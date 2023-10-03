@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late Box ziad;
 
+  int snakBarDuration = 4;
   _HomePageState({required this.ziad});
 
   late String favoriteName;
@@ -179,6 +181,7 @@ class _HomePageState extends State<HomePage> {
                   return IconButton(
                     icon: Icon(Icons.bookmark),
                     onPressed: () async {
+                      _bookMarkCaption =null.toString();
                       await Hive.initFlutter();
                       var box = await Hive.openBox(_bookmarkskey);
                       setState(() {
@@ -206,17 +209,19 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.center,
               child: Padding(
                 padding: const EdgeInsets.only(top: 5),
-                child: RichText(
-                  text: TextSpan(
-                    style: DefaultTextStyle.of(context).style,
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: '  دليل المعاصرين \n',
-                          style: TextStyle(fontSize: 22 , decoration: TextDecoration.none , color: Colors.white , fontWeight: FontWeight.bold , ) ),
-                      TextSpan(
-                          text: 'شرح رياض الصالحين',
-                          style: TextStyle(fontSize: 18 , decoration: TextDecoration.none , color: Colors.white))
-                    ],
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                      style: DefaultTextStyle.of(context).style,
+                      children: const <TextSpan>[
+                        TextSpan(
+                            text: 'دليل المعاصرين \n',
+                            style: TextStyle(fontSize: 22 , decoration: TextDecoration.none , color: Colors.white , fontWeight: FontWeight.bold , ) ),
+                        TextSpan(
+                            text: 'شرح رياض الصالحين',
+                            style: TextStyle(fontSize: 18 , decoration: TextDecoration.none , color: Colors.white))
+                      ],
+                    ),
                   ),
                 ),
               )),
@@ -600,6 +605,7 @@ class _HomePageState extends State<HomePage> {
                         submit();
                       } else if (_bookMarkCaption == null.toString()) {
                         var snackBar = SnackBar(
+                            duration: Duration(seconds: snakBarDuration),
                             content: Text(" برجاء ادخال اسم المفضلة."));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
@@ -637,6 +643,10 @@ class _HomePageState extends State<HomePage> {
                       box.deleteAt(index);
                       submit();
                       Navigator.pop(context);
+                      var snackBar = SnackBar(
+                          duration: Duration(seconds: snakBarDuration),
+                          content: Text("تم الحذف بنجاح"));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }),
                 TextButton(
                     child: Text('لا'),
@@ -684,9 +694,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _addBookMark(String name, Box box) async {
-    if (name == null) {
-      print('Please adddddddddd name');
-    } else {
+
       List<String> newBookMark = [
         (box.length + 1).toString(),
         name,
@@ -695,10 +703,55 @@ class _HomePageState extends State<HomePage> {
             .toString(),
       ];
       box.add(newBookMark);
+      var snackBar = SnackBar(
+        duration: Duration(seconds: snakBarDuration),
+          content: Text(" تم الاضافه بنجاح"));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
       print('Info added to box!');
       print(box.get(_bookmarkskey).toString());
       _boxLenght = box.length;
     }
+  }
+
+class MySplashScreen extends StatefulWidget {
+  final Box box;
+  MySplashScreen({required this.box});
+  @override
+  _MyHomePageState createState() => _MyHomePageState(box: box);
+}
+
+class _MyHomePageState extends State<MySplashScreen> {
+  Box box;
+  _MyHomePageState({required this.box});
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+        Duration(seconds: 3),
+            () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => HomePage(box: box))));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            color: Color.fromRGBO(215, 232, 237, 1.0),
+            height: MediaQuery.of(context).size.height / 4,
+          ),
+          Container(
+            child: Image.asset('images/splash.jpeg'),
+          ),
+          Container(
+            color: Color.fromRGBO(27, 30, 64, 1.0),
+            height: 145,
+          ),
+        ],
+      ),
+    );
   }
 }
