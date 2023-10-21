@@ -1,23 +1,15 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
-import 'package:ryadelsalehen/Screens/Favorities.dart';
 import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pdf_document/pdf_document.dart';
 import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pdf_document/outlines/pdf_outline.dart';
-import 'package:syncfusion_flutter_pdf/src/pdf/implementation/general/pdf_destination.dart';
-import 'package:syncfusion_flutter_pdf/src/pdf/implementation/graphics/pdf_color.dart';
-import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pdf_document/outlines/enums.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../Widgets/FavoritiesWidget.dart';
-import '../Widgets/TextButton.dart';
 import 'chapters.dart';
 
 class HomePage extends StatefulWidget {
@@ -133,7 +125,7 @@ class _HomePageState extends State<HomePage> {
               TextButton(
                 onPressed: () async {
                   String appLink =
-                      'https://www.youtube.com/watch?v=o09miTyQbPk';
+                      'https://www.youtube.com/@aljalsah6417';
                   await Share.share('hiiiiiiii \n\n$appLink');
                   _pdfViewerController.clearSelection();
                   setState(() {});
@@ -172,6 +164,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 80,
           backgroundColor: Colors.lightBlue,
           leadingWidth: 100,
           leading: Row(
@@ -207,21 +200,18 @@ class _HomePageState extends State<HomePage> {
           ),
           title: Container(
               alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Center(
-                  child: RichText(
-                    text: TextSpan(
-                      style: DefaultTextStyle.of(context).style,
-                      children: const <TextSpan>[
-                        TextSpan(
-                            text: 'دليل المعاصرين \n',
-                            style: TextStyle(fontSize: 22 , decoration: TextDecoration.none , color: Colors.white , fontWeight: FontWeight.bold , ) ),
-                        TextSpan(
-                            text: 'شرح رياض الصالحين',
-                            style: TextStyle(fontSize: 18 , decoration: TextDecoration.none , color: Colors.white))
-                      ],
-                    ),
+              child: Center(
+                child: RichText(
+                  text: TextSpan(
+                    style: DefaultTextStyle.of(context).style,
+                    children: const <TextSpan>[
+                      TextSpan(
+                          text: 'دليل المعاصرين \n',
+                          style: TextStyle(fontSize: 20 , decoration: TextDecoration.none , color: Colors.white , fontWeight: FontWeight.bold , ) ),
+                      TextSpan(
+                          text: 'شرح رياض الصالحين',
+                          style: TextStyle(fontSize: 17 , decoration: TextDecoration.none , color: Colors.white))
+                    ],
                   ),
                 ),
               )),
@@ -737,6 +727,7 @@ class _MyHomePageState extends State<MySplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       child: Column(
         children: [
           Container(
@@ -746,9 +737,11 @@ class _MyHomePageState extends State<MySplashScreen> {
           Container(
             child: Image.asset('images/splash.jpeg'),
           ),
-          Container(
-            color: Color.fromRGBO(27, 30, 64, 1.0),
-            height: 145,
+          Expanded(
+            child: Container(
+              color: Color.fromRGBO(27, 30, 64, 1.0),
+              height: 145,
+            ),
           ),
         ],
       ),
