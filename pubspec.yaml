@@ -25,7 +25,7 @@ dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "images/appIcon2lines.jpeg"
+  image_path: "images/new_logo.jpeg"
 
 
   flutter:
