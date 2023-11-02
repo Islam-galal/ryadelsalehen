@@ -443,7 +443,7 @@ class _HomePageState extends State<HomePage> {
             textDirection: TextDirection.ltr,
             child: Container(
               height: MediaQuery.of(context).size.height,
-              padding: EdgeInsets.only(bottom: 100),
+              padding: EdgeInsets.only(bottom: 10),
               child: SfPdfViewerTheme(
                 data: SfPdfViewerThemeData(
                   backgroundColor: Colors.white,
@@ -513,7 +513,16 @@ class _HomePageState extends State<HomePage> {
             await Hive.initFlutter();
             var box = await Hive.openBox(_bookmarkskey);
             for (int i = 0; i < box.length; i++) {
-              print(box.getAt(i));
+              if (i != null) {
+                print(box.getAt(i));
+              }else{
+
+                var snackBar = SnackBar(
+                    duration: Duration(seconds: snakBarDuration),
+                    content: Text("لا توجد صفحه بهذا الرقم ادخل من ١ الي ١٠٦٥"));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+              }
             }
           },
           backgroundColor: Colors.lightBlue,
@@ -704,47 +713,3 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-class MySplashScreen extends StatefulWidget {
-  final Box box;
-  MySplashScreen({required this.box});
-  @override
-  _MyHomePageState createState() => _MyHomePageState(box: box);
-}
-
-class _MyHomePageState extends State<MySplashScreen> {
-  Box box;
-  _MyHomePageState({required this.box});
-
-  @override
-  void initState() {
-    super.initState();
-    Timer(
-        Duration(seconds: 3),
-            () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => HomePage(box: box))));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-      child: Column(
-        children: [
-          Container(
-            color: Color.fromRGBO(215, 232, 237, 1.0),
-            height: MediaQuery.of(context).size.height / 4,
-          ),
-          Container(
-            child: Image.asset('images/splash.jpeg'),
-          ),
-          Expanded(
-            child: Container(
-              color: Color.fromRGBO(27, 30, 64, 1.0),
-              height: 145,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

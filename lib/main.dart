@@ -4,6 +4,10 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:ryadelsalehen/Screens/Favorities.dart';
 import 'package:ryadelsalehen/Screens/HomePage.dart';
 
+import 'Screens/Splash.dart';
+
+import 'Screens/Splash.dart';
+
 void main() async {
   await Hive.initFlutter();
   var bookMarkedBox = await Hive.openBox('bookMarked');
