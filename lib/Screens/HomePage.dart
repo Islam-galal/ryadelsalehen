@@ -526,26 +526,6 @@ class _HomePageState extends State<HomePage> {
                 )),
           ),
         ]),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () async {
-        //     openDialogToPage();
-        //     await Hive.initFlutter();
-        //     var box = await Hive.openBox(_bookmarkskey);
-        //     for (int i = 0; i < box.length; i++) {
-        //       if (i <= 1065) {
-        //         print(box.getAt(i));
-        //       } else {
-        //         var snackBar = SnackBar(
-        //             duration: Duration(seconds: snakBarDuration),
-        //             content:
-        //                 Text("لا توجد صفحه بهذا الرقم ادخل من ١ الي ١٠٦٥"));
-        //         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        //       }
-        //     }
-        //   },
-        //   backgroundColor: Colors.lightBlue,
-        //   child: const Icon(Icons.search),
-        // ),
       ),
     );
   }
@@ -682,7 +662,7 @@ class _HomePageState extends State<HomePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('اكتب رقم الصفحة'),
+        title: const Text('اكتب رقم الصفحه بالغه الانجليزيه'),
         content: TextField(
           keyboardType: TextInputType.number,
           onChanged: (data) {
