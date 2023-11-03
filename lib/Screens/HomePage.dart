@@ -185,17 +185,29 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              IconButton(
-                  onPressed: () {
-                    ShareFilesAndScreenshotWidgets().shareScreenshot(
-                      previewContainer,
-                      originalSize,
-                      "Title",
-                      "Name.png",
-                      "image/png",
-                    );
-                  },
-                  icon: Icon(Icons.share)),
+              Expanded(
+                child: IconButton(
+                    onPressed: () {
+                      ShareFilesAndScreenshotWidgets().shareScreenshot(
+                        previewContainer,
+                        originalSize,
+                        "Title",
+                        "Name.png",
+                        "image/png",
+                      );
+                    },
+                    icon: Icon(Icons.share)),
+              ),
+              SizedBox(width: 40,),
+              Expanded(
+                child: IconButton(
+                    onPressed: () {
+
+                      openDialogToPage();
+
+                    },
+                    icon: Icon(Icons.search)),
+              ),
             ],
           ),
           title: Container(
@@ -508,12 +520,11 @@ class _HomePageState extends State<HomePage> {
         ]),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            // getCurrentPageNumber();
             openDialogToPage();
             await Hive.initFlutter();
             var box = await Hive.openBox(_bookmarkskey);
             for (int i = 0; i < box.length; i++) {
-              if (i != null) {
+              if (i <= 1065) {
                 print(box.getAt(i));
               }else{
 
@@ -680,8 +691,17 @@ class _HomePageState extends State<HomePage> {
           TextButton(
               child: const Text('Ok'),
               onPressed: () {
-                _pdfViewerController.jumpToPage(pageNumber!);
-                submit();
+                if (pageNumber <= 1065) {
+                  _pdfViewerController.jumpToPage(pageNumber!);
+                  submit();
+                }else{
+
+                  var snackBar = SnackBar(
+                      duration: Duration(seconds: snakBarDuration),
+                      content: Text("لا توجد صفحه بهذا الرقم ادخل من ١ الي ١٠٦٥"));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                }
               }),
         ],
       ),
