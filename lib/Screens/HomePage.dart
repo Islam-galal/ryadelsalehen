@@ -124,8 +124,7 @@ class _HomePageState extends State<HomePage> {
               ),
               TextButton(
                 onPressed: () async {
-                  String appLink =
-                      'https://www.youtube.com/@aljalsah6417';
+                  String appLink = 'https://www.youtube.com/@aljalsah6417';
                   await Share.share('hiiiiiiii \n\n$appLink');
                   _pdfViewerController.clearSelection();
                   setState(() {});
@@ -166,7 +165,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           toolbarHeight: 80,
           backgroundColor: Colors.lightBlue,
-          leadingWidth: 100,
+          leadingWidth: 140,
           leading: Row(
             children: [
               Builder(
@@ -174,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                   return IconButton(
                     icon: Icon(Icons.bookmark),
                     onPressed: () async {
-                      _bookMarkCaption =null.toString();
+                      _bookMarkCaption = null.toString();
                       await Hive.initFlutter();
                       var box = await Hive.openBox(_bookmarkskey);
                       setState(() {
@@ -187,6 +186,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: IconButton(
+                    padding: EdgeInsets.symmetric(vertical: 10),
                     onPressed: () {
                       ShareFilesAndScreenshotWidgets().shareScreenshot(
                         previewContainer,
@@ -198,13 +198,14 @@ class _HomePageState extends State<HomePage> {
                     },
                     icon: Icon(Icons.share)),
               ),
-              SizedBox(width: 40,),
+              SizedBox(
+                width: 5,
+              ),
               Expanded(
                 child: IconButton(
+                    padding: EdgeInsets.symmetric(vertical: 10),
                     onPressed: () {
-
                       openDialogToPage();
-
                     },
                     icon: Icon(Icons.search)),
               ),
@@ -219,10 +220,18 @@ class _HomePageState extends State<HomePage> {
                     children: const <TextSpan>[
                       TextSpan(
                           text: 'دليل المعاصرين \n',
-                          style: TextStyle(fontSize: 20 , decoration: TextDecoration.none , color: Colors.white , fontWeight: FontWeight.bold , ) ),
+                          style: TextStyle(
+                            fontSize: 20,
+                            decoration: TextDecoration.none,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          )),
                       TextSpan(
                           text: 'شرح رياض الصالحين',
-                          style: TextStyle(fontSize: 17 , decoration: TextDecoration.none , color: Colors.white))
+                          style: TextStyle(
+                              fontSize: 17,
+                              decoration: TextDecoration.none,
+                              color: Colors.white))
                     ],
                   ),
                 ),
@@ -363,7 +372,6 @@ class _HomePageState extends State<HomePage> {
                     const Divider(
                       height: 30,
                     ),
-
                     Container(
                       padding: const EdgeInsets.all(2),
                       decoration: BoxDecoration(
@@ -408,7 +416,6 @@ class _HomePageState extends State<HomePage> {
                                 color: Colors.black),
                           )),
                     ),
-
                     const Divider(),
                   ],
                 ),
@@ -493,7 +500,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.only(bottom: 20),
+            alignment: Alignment.bottomLeft,
             child: IconButton(
                 onPressed: () {
                   _pdfViewerController.previousPage();
@@ -505,8 +513,8 @@ class _HomePageState extends State<HomePage> {
                 )),
           ),
           Container(
-            padding: EdgeInsets.only(right: 5),
-            alignment: Alignment.centerRight,
+            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+            alignment: Alignment.bottomRight,
             child: IconButton(
                 onPressed: () {
                   _pdfViewerController.nextPage();
@@ -518,27 +526,26 @@ class _HomePageState extends State<HomePage> {
                 )),
           ),
         ]),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            openDialogToPage();
-            await Hive.initFlutter();
-            var box = await Hive.openBox(_bookmarkskey);
-            for (int i = 0; i < box.length; i++) {
-              if (i <= 1065) {
-                print(box.getAt(i));
-              }else{
-
-                var snackBar = SnackBar(
-                    duration: Duration(seconds: snakBarDuration),
-                    content: Text("لا توجد صفحه بهذا الرقم ادخل من ١ الي ١٠٦٥"));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-              }
-            }
-          },
-          backgroundColor: Colors.lightBlue,
-          child: const Icon(Icons.search),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () async {
+        //     openDialogToPage();
+        //     await Hive.initFlutter();
+        //     var box = await Hive.openBox(_bookmarkskey);
+        //     for (int i = 0; i < box.length; i++) {
+        //       if (i <= 1065) {
+        //         print(box.getAt(i));
+        //       } else {
+        //         var snackBar = SnackBar(
+        //             duration: Duration(seconds: snakBarDuration),
+        //             content:
+        //                 Text("لا توجد صفحه بهذا الرقم ادخل من ١ الي ١٠٦٥"));
+        //         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        //       }
+        //     }
+        //   },
+        //   backgroundColor: Colors.lightBlue,
+        //   child: const Icon(Icons.search),
+        // ),
       ),
     );
   }
@@ -694,13 +701,12 @@ class _HomePageState extends State<HomePage> {
                 if (pageNumber <= 1065) {
                   _pdfViewerController.jumpToPage(pageNumber!);
                   submit();
-                }else{
-
+                } else {
                   var snackBar = SnackBar(
                       duration: Duration(seconds: snakBarDuration),
-                      content: Text("لا توجد صفحه بهذا الرقم ادخل من ١ الي ١٠٦٥"));
+                      content:
+                          Text("لا توجد صفحه بهذا الرقم ادخل من ١ الي ١٠٦٥"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
                 }
               }),
         ],
@@ -713,23 +719,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   _addBookMark(String name, Box box) async {
-
-      List<String> newBookMark = [
-        (box.length + 1).toString(),
-        name,
-        _currentPage.toString(),
-        '${DateTime.now().year} - ${DateTime.now().month} - ${DateTime.now().day}'
-            .toString(),
-      ];
-      box.add(newBookMark);
-      var snackBar = SnackBar(
+    List<String> newBookMark = [
+      (box.length + 1).toString(),
+      name,
+      _currentPage.toString(),
+      '${DateTime.now().year} - ${DateTime.now().month} - ${DateTime.now().day}'
+          .toString(),
+    ];
+    box.add(newBookMark);
+    var snackBar = SnackBar(
         duration: Duration(seconds: snakBarDuration),
-          content: Text(" تم الاضافه بنجاح"));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        content: Text(" تم الاضافه بنجاح"));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
-      print('Info added to box!');
-      print(box.get(_bookmarkskey).toString());
-      _boxLenght = box.length;
-    }
+    print('Info added to box!');
+    print(box.get(_bookmarkskey).toString());
+    _boxLenght = box.length;
   }
-
+}
