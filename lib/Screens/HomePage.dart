@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           toolbarHeight: 80,
           backgroundColor: Colors.lightBlue,
-          leadingWidth: 140,
+          leadingWidth: 120,
           leading: Row(
             children: [
               Builder(
@@ -212,8 +212,10 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           title: Container(
+              width: double.infinity,
               alignment: Alignment.center,
               child: Center(
+                widthFactor: 120,
                 child: RichText(
                   text: TextSpan(
                     style: DefaultTextStyle.of(context).style,
