@@ -15,7 +15,7 @@
 
 
     <application
-        android:label="دليل\r\n المعاصرين "
+        android:label="دليل المعاصرين "
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
