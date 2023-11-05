@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
   String id = 'HomePage';
   Box box;
 
-  HomePage({required this.box});
+  HomePage({super.key, required this.box});
 
   @override
   State<HomePage> createState() => _HomePageState(ziad: box);
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   int originalSize = 800;
   late int _currentPage = 1;
   int _numberOfBookmarks = 0;
-  double _zoom = 1;
+  final double _zoom = 1;
 
   String _bookMarkCaption = null.toString();
   final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
   late PdfViewerController _pdfViewerController;
   late PdfBookmark _pdfBookmark;
   late PdfTextSearchResult _searchResult;
-  GlobalKey previewContainer = new GlobalKey();
+  GlobalKey previewContainer = GlobalKey();
 
   OverlayEntry? _overlayEntry;
   int _selectedIndex = 0 - 1;
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
 
   void getStringFromLocalStorage(String key) async {
     final prefs = await SharedPreferences.getInstance();
-    final prefs1 = await prefs.getInt(key);
+    final prefs1 = prefs.getInt(key);
     setState(() {
       if (_currentPage != 0) {
         _currentPage = prefs1!;
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
 
   void _showContextMenu(
       BuildContext context, PdfTextSelectionChangedDetails details) {
-    final OverlayState _overlayState = Overlay.of(context)!;
+    final OverlayState overlayState = Overlay.of(context);
     _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
         top: details.globalSelectedRegion!.center.dy - 75,
@@ -110,8 +110,8 @@ class _HomePageState extends State<HomePage> {
                       text: details.selectedText
                           .toString()
                           .replaceAll("\n", "")));
-                  print('Text copied to clipboardssssssssssss: ' +
-                      details.selectedText.toString().replaceAll("\n", ""));
+                  print(
+                      'Text copied to clipboardssssssssssss: ${details.selectedText.toString().replaceAll("\n", "")}');
                   _pdfViewerController.clearSelection();
                   setState(() {});
                 },
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-    _overlayState.insert(_overlayEntry!);
+    overlayState.insert(_overlayEntry!);
   }
 
   void _onItemTapped(int index) {
@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 80,
+          toolbarHeight: 150,
           backgroundColor: Colors.lightBlue,
           leadingWidth: 120,
           leading: Row(
@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
               Builder(
                 builder: (context) {
                   return IconButton(
-                    icon: Icon(Icons.bookmark),
+                    icon: const Icon(Icons.bookmark),
                     onPressed: () async {
                       _bookMarkCaption = null.toString();
                       await Hive.initFlutter();
@@ -186,7 +186,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: IconButton(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     onPressed: () {
                       ShareFilesAndScreenshotWidgets().shareScreenshot(
                         previewContainer,
@@ -196,18 +196,18 @@ class _HomePageState extends State<HomePage> {
                         "image/png",
                       );
                     },
-                    icon: Icon(Icons.share)),
+                    icon: const Icon(Icons.share)),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Expanded(
                 child: IconButton(
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     onPressed: () {
                       openDialogToPage();
                     },
-                    icon: Icon(Icons.search)),
+                    icon: const Icon(Icons.search)),
               ),
             ],
           ),
@@ -324,8 +324,8 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${index + 1} - ' +
-                                  'اسم المفضلة : ${ziad.getAt(index)[1]}',
+                              '${index + 1} - '
+                              'اسم المفضلة : ${ziad.getAt(index)[1]}',
                               style: const TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold),
                             ),
@@ -437,8 +437,7 @@ class _HomePageState extends State<HomePage> {
                               bottomRight: Radius.circular(40))),
                       child: ListTile(
                         title: Text(
-                          '${index + 1} - ' +
-                              '${getChapterName()[index].toString()}',
+                          '${index + 1} - ${getChapterName()[index]}',
                           style: const TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),
@@ -464,7 +463,7 @@ class _HomePageState extends State<HomePage> {
             textDirection: TextDirection.ltr,
             child: Container(
               height: MediaQuery.of(context).size.height,
-              padding: EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(bottom: 10),
               child: SfPdfViewerTheme(
                 data: SfPdfViewerThemeData(
                   backgroundColor: Colors.white,
@@ -502,26 +501,26 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Container(
-            padding: EdgeInsets.only(bottom: 20),
+            padding: const EdgeInsets.only(bottom: 20),
             alignment: Alignment.bottomLeft,
             child: IconButton(
                 onPressed: () {
                   _pdfViewerController.previousPage();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_circle_left_sharp,
                   size: 40,
                   color: Colors.lightBlue,
                 )),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
             alignment: Alignment.bottomRight,
             child: IconButton(
                 onPressed: () {
                   _pdfViewerController.nextPage();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_circle_right_sharp,
                   size: 40,
                   color: Colors.lightBlue,
@@ -571,19 +570,20 @@ class _HomePageState extends State<HomePage> {
       builder: (context) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          title: Text('هل تريد الاضافة الي المفضلة.؟'),
+          title: const Text('هل تريد الاضافة الي المفضلة.؟'),
           content: TextFormField(
             validator: (data) {
               if (data!.isEmpty) {
                 return 'field is required';
               }
+              return null;
             },
             keyboardType: TextInputType.text,
             onChanged: (data) {
               _bookMarkCaption = data;
             },
             autofocus: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: 'اضف عنوان',
             ),
           ),
@@ -592,7 +592,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                    child: Text('نعم'),
+                    child: const Text('نعم'),
                     onPressed: () async {
                       if (_bookMarkCaption != null.toString()) {
                         await Hive.initFlutter();
@@ -605,12 +605,12 @@ class _HomePageState extends State<HomePage> {
                       } else if (_bookMarkCaption == null.toString()) {
                         var snackBar = SnackBar(
                             duration: Duration(seconds: snakBarDuration),
-                            content: Text(" برجاء ادخال اسم المفضلة."));
+                            content: const Text(" برجاء ادخال اسم المفضلة."));
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       }
                     }),
                 TextButton(
-                    child: Text('لا'),
+                    child: const Text('لا'),
                     onPressed: () {
                       submit();
                     })
@@ -628,13 +628,13 @@ class _HomePageState extends State<HomePage> {
       builder: (context) => Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          title: Text('هل تريد حذف المفضلة ؟'),
+          title: const Text('هل تريد حذف المفضلة ؟'),
           actions: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                    child: Text('نعم'),
+                    child: const Text('نعم'),
                     onPressed: () async {
                       await Hive.initFlutter();
                       var box = await Hive.openBox(_bookmarkskey);
@@ -644,11 +644,11 @@ class _HomePageState extends State<HomePage> {
                       Navigator.pop(context);
                       var snackBar = SnackBar(
                           duration: Duration(seconds: snakBarDuration),
-                          content: Text("تم الحذف بنجاح"));
+                          content: const Text("تم الحذف بنجاح"));
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     }),
                 TextButton(
-                    child: Text('لا'),
+                    child: const Text('لا'),
                     onPressed: () {
                       submit();
                     })
@@ -681,13 +681,13 @@ class _HomePageState extends State<HomePage> {
               child: const Text('Ok'),
               onPressed: () {
                 if (pageNumber <= 1065) {
-                  _pdfViewerController.jumpToPage(pageNumber!);
+                  _pdfViewerController.jumpToPage(pageNumber);
                   submit();
                 } else {
                   var snackBar = SnackBar(
                       duration: Duration(seconds: snakBarDuration),
-                      content:
-                          Text("لا توجد صفحه بهذا الرقم ادخل من ١ الي ١٠٦٥"));
+                      content: const Text(
+                          "لا توجد صفحه بهذا الرقم ادخل من ١ الي ١٠٦٥"));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
               }),
@@ -711,7 +711,7 @@ class _HomePageState extends State<HomePage> {
     box.add(newBookMark);
     var snackBar = SnackBar(
         duration: Duration(seconds: snakBarDuration),
-        content: Text(" تم الاضافه بنجاح"));
+        content: const Text(" تم الاضافه بنجاح"));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
     print('Info added to box!');
