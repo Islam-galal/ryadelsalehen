@@ -32,7 +32,6 @@ class _HomePageState extends State<HomePage> {
 
   bool favoriteVisability = false;
 
-
   final String _bookmarkskey = 'Bookmark';
   int pageNumber = 1;
   int lastPageViewed = 1;
@@ -157,8 +156,9 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 150,
-          backgroundColor: Colors.lightBlue,
+          toolbarHeight: 75,
+          elevation: 0,
+          backgroundColor: Colors.red,
           leadingWidth: 120,
           leading: Row(
             children: [
@@ -195,19 +195,19 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 width: 5,
               ),
-              Expanded(
-                child: IconButton(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    onPressed: () {
-                      openDialogToPage();
-                    },
-                    icon: const Icon(Icons.search)),
-              ),
+              // Expanded(
+                // child: IconButton(
+                //     padding: const EdgeInsets.symmetric(vertical: 10),
+                //     onPressed: () {
+                //       openDialogToPage();
+                //     },
+                //     icon: const Icon(Icons.search)),
+              // ),
             ],
           ),
           title: Container(
               width: double.infinity,
-              alignment: Alignment.center,
+              alignment: Alignment.bottomCenter,
               child: Center(
                 widthFactor: 120,
                 child: RichText(
@@ -494,22 +494,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          // Container(
-          //   padding: const EdgeInsets.only(bottom: 20),
-          //   alignment: Alignment.bottomLeft,
-          //   child: IconButton(
-          //       onPressed: () {
-          //         _pdfViewerController.previousPage();
-          //       },
-          //       icon: const Icon(
-          //         Icons.arrow_circle_left_sharp,
-          //         size: 40,
-          //         color: Colors.lightBlue,
-          //       )),
-          // ),
           GestureDetector(
-            onTap: (){
-               _pdfViewerController.nextPage();
+            onTap: () {
+              _pdfViewerController.nextPage();
             },
             child: Padding(
               padding: const EdgeInsets.all(25),
@@ -517,21 +504,29 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.bottomLeft,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.red,
-                    
-                    borderRadius: BorderRadius.circular(30)
-                  ),
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(30)),
                   // color: Colors.red,
                   width: 110,
                   height: 50,
                   child: const Row(
-                    
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,size: 20,),
-                      SizedBox(width: 10,),
-                      Text('التالي',style: TextStyle(color: Colors.white , fontSize: 20,fontWeight:FontWeight.bold),),
-                      
+                      Icon(
+                        Icons.arrow_back_ios_new_outlined,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'التالي',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                 ),
@@ -539,8 +534,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           GestureDetector(
-            onTap: (){
-               _pdfViewerController.previousPage();
+            onTap: () {
+              _pdfViewerController.previousPage();
             },
             child: Padding(
               padding: const EdgeInsets.all(25),
@@ -548,42 +543,75 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.bottomRight,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.red,
-                    
-                    borderRadius: BorderRadius.circular(30)
-                  ),
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(30)),
                   // color: Colors.red,
                   width: 110,
                   height: 50,
                   child: const Row(
-                    
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      
-                      Text('السابق',style: TextStyle(color: Colors.white , fontSize: 20,fontWeight:FontWeight.bold),),
-                      SizedBox(width: 10,),
-                      Icon(Icons.arrow_forward_ios_outlined, color: Colors.white,size: 20,),
-                      
-                      
+                      Text(
+                        'السابق',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: Colors.white,
+                        size: 20,
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
           ),
-          // Container(
-          //   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-          //   alignment: Alignment.bottomRight,
-          //   child: IconButton(
-          //       onPressed: () {
-          //         _pdfViewerController.nextPage();
-          //       },
-          //       icon: const Icon(
-          //         Icons.arrow_circle_right_sharp,
-          //         size: 40,
-          //         color: Colors.lightBlue,
-          //       )),
-          // ),
+          Container(
+            color: Colors.red,
+            height: 70,
+          ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Container(
+              
+              margin: EdgeInsets.only(left: 25, right: 25, bottom: 25),
+              height: 50,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                cursorColor: Colors.grey,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(5),
+                  fillColor: Colors.white,
+                  filled: true,
+                  hintTextDirection: TextDirection.rtl,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
+                  ),
+                  prefixIcon: Container(
+                    child: Icon(
+                      Icons.search_outlined,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  hintText: '  ابحث برقم الصفحة ..',
+                  hintStyle: TextStyle(
+                    color: Colors.grey,
+                  ),
+                ),
+                onChanged: (value){
+                  _pdfViewerController.jumpToPage(int.parse(value));
+
+                },
+              ),
+            ),
+          ),
         ]),
       ),
     );
