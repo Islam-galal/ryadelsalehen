@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ButtonField extends StatelessWidget {
-  ButtonField({
+  ButtonField({super.key, 
     required this.text,
     required this.onPressed,
   });
@@ -25,7 +24,7 @@ class ButtonField extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
               color: Colors.white,

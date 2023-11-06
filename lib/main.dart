@@ -1,12 +1,10 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:ryadelsalehen/Screens/Favorities.dart';
-import 'package:ryadelsalehen/Screens/HomePage.dart';
 
 import 'Screens/Splash.dart';
 
-import 'Screens/Splash.dart';
 
 void main() async {
   await Hive.initFlutter();

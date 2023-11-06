@@ -1,15 +1,15 @@
 import 'dart:async';
-import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hive/hive.dart';
-import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
-import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pdf_document/outlines/pdf_outline.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:syncfusion_flutter_pdf/src/pdf/implementation/pdf_document/outlines/pdf_outline.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+
 import 'chapters.dart';
 
 class HomePage extends StatefulWidget {
@@ -32,10 +32,8 @@ class _HomePageState extends State<HomePage> {
 
   bool favoriteVisability = false;
 
-  int _boxLenght = 0;
 
   final String _bookmarkskey = 'Bookmark';
-  late var _getData;
   int pageNumber = 1;
   int lastPageViewed = 1;
   int originalSize = 800;
@@ -45,10 +43,7 @@ class _HomePageState extends State<HomePage> {
 
   String _bookMarkCaption = null.toString();
   final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
-  final GlobalKey<SfPdfViewerState> _pdfviewerStatekey = GlobalKey();
   late PdfViewerController _pdfViewerController;
-  late PdfBookmark _pdfBookmark;
-  late PdfTextSearchResult _searchResult;
   GlobalKey previewContainer = GlobalKey();
 
   OverlayEntry? _overlayEntry;
@@ -63,7 +58,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _pdfViewerController = PdfViewerController();
-    _searchResult = PdfTextSearchResult();
     textController = TextEditingController();
 
     super.initState();
@@ -500,18 +494,47 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.only(bottom: 20),
-            alignment: Alignment.bottomLeft,
-            child: IconButton(
-                onPressed: () {
-                  _pdfViewerController.previousPage();
-                },
-                icon: const Icon(
-                  Icons.arrow_circle_left_sharp,
-                  size: 40,
-                  color: Colors.lightBlue,
-                )),
+          // Container(
+          //   padding: const EdgeInsets.only(bottom: 20),
+          //   alignment: Alignment.bottomLeft,
+          //   child: IconButton(
+          //       onPressed: () {
+          //         _pdfViewerController.previousPage();
+          //       },
+          //       icon: const Icon(
+          //         Icons.arrow_circle_left_sharp,
+          //         size: 40,
+          //         color: Colors.lightBlue,
+          //       )),
+          // ),
+          GestureDetector(
+            onTap: (){
+              _pdfViewerController.previousPage();
+            },
+            child: Padding(
+              padding: EdgeInsets.only(top: 100),
+              child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  
+                  borderRadius: BorderRadius.circular(30)
+                ),
+                // color: Colors.red,
+                width: 110,
+                height: 50,
+                child: const Row(
+                  
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,size: 20,),
+                    SizedBox(width: 10,),
+                    Text('السابق',style: TextStyle(color: Colors.white , fontSize: 20,fontWeight:FontWeight.bold),),
+                    
+                  ],
+                ),
+              ),
+            ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
@@ -716,6 +739,5 @@ class _HomePageState extends State<HomePage> {
 
     print('Info added to box!');
     print(box.get(_bookmarkskey).toString());
-    _boxLenght = box.length;
   }
 }
