@@ -521,7 +521,7 @@ class _HomePageState extends State<HomePage> {
                         width: 10,
                       ),
                       Text(
-                        'السابق',
+                        'التالي',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -552,7 +552,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'التالي',
+                        'السابق',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
