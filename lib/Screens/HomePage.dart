@@ -509,46 +509,81 @@ class _HomePageState extends State<HomePage> {
           // ),
           GestureDetector(
             onTap: (){
-              _pdfViewerController.previousPage();
+               _pdfViewerController.nextPage();
             },
             child: Padding(
-              padding: EdgeInsets.only(top: 100),
+              padding: const EdgeInsets.all(25),
               child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  
-                  borderRadius: BorderRadius.circular(30)
-                ),
-                // color: Colors.red,
-                width: 110,
-                height: 50,
-                child: const Row(
-                  
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,size: 20,),
-                    SizedBox(width: 10,),
-                    Text('السابق',style: TextStyle(color: Colors.white , fontSize: 20,fontWeight:FontWeight.bold),),
+                alignment: Alignment.bottomLeft,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
                     
-                  ],
+                    borderRadius: BorderRadius.circular(30)
+                  ),
+                  // color: Colors.red,
+                  width: 110,
+                  height: 50,
+                  child: const Row(
+                    
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white,size: 20,),
+                      SizedBox(width: 10,),
+                      Text('التالي',style: TextStyle(color: Colors.white , fontSize: 20,fontWeight:FontWeight.bold),),
+                      
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-            alignment: Alignment.bottomRight,
-            child: IconButton(
-                onPressed: () {
-                  _pdfViewerController.nextPage();
-                },
-                icon: const Icon(
-                  Icons.arrow_circle_right_sharp,
-                  size: 40,
-                  color: Colors.lightBlue,
-                )),
+          GestureDetector(
+            onTap: (){
+               _pdfViewerController.previousPage();
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(25),
+              child: Container(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    
+                    borderRadius: BorderRadius.circular(30)
+                  ),
+                  // color: Colors.red,
+                  width: 110,
+                  height: 50,
+                  child: const Row(
+                    
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      
+                      Text('السابق',style: TextStyle(color: Colors.white , fontSize: 20,fontWeight:FontWeight.bold),),
+                      SizedBox(width: 10,),
+                      Icon(Icons.arrow_forward_ios_outlined, color: Colors.white,size: 20,),
+                      
+                      
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
+          // Container(
+          //   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+          //   alignment: Alignment.bottomRight,
+          //   child: IconButton(
+          //       onPressed: () {
+          //         _pdfViewerController.nextPage();
+          //       },
+          //       icon: const Icon(
+          //         Icons.arrow_circle_right_sharp,
+          //         size: 40,
+          //         color: Colors.lightBlue,
+          //       )),
+          // ),
         ]),
       ),
     );
