@@ -196,12 +196,12 @@ class _HomePageState extends State<HomePage> {
                 width: 5,
               ),
               // Expanded(
-                // child: IconButton(
-                //     padding: const EdgeInsets.symmetric(vertical: 10),
-                //     onPressed: () {
-                //       openDialogToPage();
-                //     },
-                //     icon: const Icon(Icons.search)),
+              // child: IconButton(
+              //     padding: const EdgeInsets.symmetric(vertical: 10),
+              //     onPressed: () {
+              //       openDialogToPage();
+              //     },
+              //     icon: const Icon(Icons.search)),
               // ),
             ],
           ),
@@ -521,7 +521,7 @@ class _HomePageState extends State<HomePage> {
                         width: 10,
                       ),
                       Text(
-                        'التالي',
+                        'السابق',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -552,7 +552,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'السابق',
+                        'التالي',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -579,7 +579,6 @@ class _HomePageState extends State<HomePage> {
           Directionality(
             textDirection: TextDirection.rtl,
             child: Container(
-              
               margin: EdgeInsets.only(left: 25, right: 25, bottom: 25),
               height: 50,
               child: TextField(
@@ -605,9 +604,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.grey,
                   ),
                 ),
-                onChanged: (value){
+                onChanged: (value) {
                   _pdfViewerController.jumpToPage(int.parse(value));
-
                 },
               ),
             ),
