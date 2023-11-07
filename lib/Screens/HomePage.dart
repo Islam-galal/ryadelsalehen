@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           toolbarHeight: 75,
           elevation: 0,
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.lightBlue,
           leadingWidth: 120,
           leading: Row(
             children: [
@@ -195,14 +195,14 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 width: 5,
               ),
-              // Expanded(
-              // child: IconButton(
-              //     padding: const EdgeInsets.symmetric(vertical: 10),
-              //     onPressed: () {
-              //       openDialogToPage();
-              //     },
-              //     icon: const Icon(Icons.search)),
-              // ),
+              Expanded(
+                child: IconButton(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    onPressed: () {
+                      openDialogToPage();
+                    },
+                    icon: const Icon(Icons.search)),
+              ),
             ],
           ),
           title: Container(
@@ -504,7 +504,7 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.bottomLeft,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: Colors.lightBlue,
                       borderRadius: BorderRadius.circular(30)),
                   // color: Colors.red,
                   width: 110,
@@ -543,7 +543,7 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.bottomRight,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: Colors.lightBlue,
                       borderRadius: BorderRadius.circular(30)),
                   // color: Colors.red,
                   width: 110,
@@ -572,44 +572,44 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Container(
-            color: Colors.red,
-            height: 70,
-          ),
-          Directionality(
-            textDirection: TextDirection.rtl,
-            child: Container(
-              margin: EdgeInsets.only(left: 25, right: 25, bottom: 25),
-              height: 50,
-              child: TextField(
-                keyboardType: TextInputType.number,
-                cursorColor: Colors.grey,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(5),
-                  fillColor: Colors.white,
-                  filled: true,
-                  hintTextDirection: TextDirection.rtl,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide.none,
-                  ),
-                  prefixIcon: Container(
-                    child: Icon(
-                      Icons.search_outlined,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  hintText: '  ابحث برقم الصفحة ..',
-                  hintStyle: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-                onChanged: (value) {
-                  _pdfViewerController.jumpToPage(int.parse(value));
-                },
-              ),
-            ),
-          ),
+          // Container(
+          //   color: Colors.red,
+          //   height: 70,
+          // ),
+          // Directionality(
+          //   textDirection: TextDirection.rtl,
+          //   child: Container(
+          //     margin: EdgeInsets.only(left: 25, right: 25, bottom: 25),
+          //     height: 50,
+          //     child: TextField(
+          //       keyboardType: TextInputType.number,
+          //       cursorColor: Colors.grey,
+          //       decoration: InputDecoration(
+          //         contentPadding: EdgeInsets.all(5),
+          //         fillColor: Colors.white,
+          //         filled: true,
+          //         hintTextDirection: TextDirection.rtl,
+          //         border: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(30),
+          //           borderSide: BorderSide.none,
+          //         ),
+          //         prefixIcon: Container(
+          //           child: Icon(
+          //             Icons.search_outlined,
+          //             color: Colors.grey,
+          //           ),
+          //         ),
+          //         hintText: '  ابحث برقم الصفحة ..',
+          //         hintStyle: TextStyle(
+          //           color: Colors.grey,
+          //         ),
+          //       ),
+          //       onChanged: (value) {
+          //         _pdfViewerController.jumpToPage(int.parse(value));
+          //       },
+          //     ),
+          //   ),
+          // ),
         ]),
       ),
     );
