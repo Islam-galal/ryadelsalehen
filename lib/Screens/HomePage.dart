@@ -496,7 +496,7 @@ class _HomePageState extends State<HomePage> {
           ),
           GestureDetector(
             onTap: () {
-              _pdfViewerController.nextPage();
+              _pdfViewerController.previousPage();
             },
             child: Padding(
               padding: const EdgeInsets.all(25),
@@ -521,7 +521,7 @@ class _HomePageState extends State<HomePage> {
                         width: 10,
                       ),
                       Text(
-                        'التالي',
+                        'السابق',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -535,7 +535,7 @@ class _HomePageState extends State<HomePage> {
           ),
           GestureDetector(
             onTap: () {
-              _pdfViewerController.previousPage();
+              _pdfViewerController.nextPage();
             },
             child: Padding(
               padding: const EdgeInsets.all(25),
@@ -552,7 +552,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'السابق',
+                        'التالي',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
