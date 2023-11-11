@@ -292,6 +292,32 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const Divider(),
+                  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                          color: Colors.blue.shade200,
+                          shape: BoxShape.rectangle,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomRight: Radius.circular(10))),
+                      child: TextButton(
+                          onPressed: () {
+                            _pdfViewerController.jumpToPage(639);
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            ' باب فضل قراءه القرآن ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          )),
+                    ),
+                  ),
+                  const Divider(),
                 ],
               ),
             ),
