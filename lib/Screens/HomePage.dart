@@ -155,6 +155,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: AppBar(
           toolbarHeight: 75,
           elevation: 0,
@@ -165,7 +166,7 @@ class _HomePageState extends State<HomePage> {
               Builder(
                 builder: (context) {
                   return IconButton(
-                    icon: const Icon(Icons.bookmark),
+                    icon: const Icon(Icons.bookmark_border),
                     onPressed: () async {
                       _bookMarkCaption = null.toString();
                       await Hive.initFlutter();
@@ -190,18 +191,44 @@ class _HomePageState extends State<HomePage> {
                         "image/png",
                       );
                     },
-                    icon: const Icon(Icons.share)),
+                    icon: const Icon(Icons.share_sharp)),
               ),
               const SizedBox(
                 width: 5,
               ),
               Expanded(
-                child: IconButton(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Container(
+                  color: Colors.lightBlue,
+                  child: ElevatedButton(
                     onPressed: () {
-                      openDialogToPage();
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SizedBox(
+                              height: 400,
+                              child: Center(
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                        "hereee add data you need ")),
+                              ),
+                            );
+                          });
                     },
-                    icon: const Icon(Icons.search)),
+                    child: const Icon(
+                      Icons.search,
+                    ),
+                  ),
+                ),
+
+                // child: IconButton(
+                //     padding: const EdgeInsets.symmetric(vertical: 10),
+                //     onPressed: () {
+                //       openDialogToPage();
+                //     },
+                //     icon: const Icon(Icons.search)),
               ),
             ],
           ),
@@ -284,32 +311,6 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {},
                           child: const Text(
                             'قائمة المفضلات : ',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          )),
-                    ),
-                  ),
-                  const Divider(),
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                          color: Colors.blue.shade200,
-                          shape: BoxShape.rectangle,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10))),
-                      child: TextButton(
-                          onPressed: () {
-                            _pdfViewerController.jumpToPage(639);
-                            Navigator.pop(context);
-                          },
-                          child: const Text(
-                            ' باب فضل قراءه القرآن ',
                             style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -525,7 +526,7 @@ class _HomePageState extends State<HomePage> {
               _pdfViewerController.previousPage();
             },
             child: Padding(
-              padding: const EdgeInsets.all(25),
+              padding: const EdgeInsets.all(20),
               child: Container(
                 alignment: Alignment.bottomLeft,
                 child: Container(
@@ -564,7 +565,7 @@ class _HomePageState extends State<HomePage> {
               _pdfViewerController.nextPage();
             },
             child: Padding(
-              padding: const EdgeInsets.all(25),
+              padding: const EdgeInsets.all(20),
               child: Container(
                 alignment: Alignment.bottomRight,
                 child: Container(
@@ -598,6 +599,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+
           // Container(
           //   color: Colors.red,
           //   height: 70,
