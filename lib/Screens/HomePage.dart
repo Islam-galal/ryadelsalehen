@@ -209,11 +209,60 @@ class _HomePageState extends State<HomePage> {
                               height: 400,
                               child: Center(
                                 child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text(
-                                        "hereee add data you need ")),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    color: Colors.white,
+                                    child: Column(
+                                      
+                                      children: [
+                                        
+                                        Row(
+                                          children: [
+                                            IconButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                icon: Icon(
+                                                  Icons.close,
+                                                  color: Colors.black,
+                                                )),
+                                            SizedBox(
+                                              width: 150,
+                                            ),
+                                            Text(
+                                              'البحث عن الصفحه',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 22),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "اكتب هنا رقم الصفحه بالغه الانجليزيه ",
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.grey,
+                                              ),
+                                            )
+                                         TextButton(onPressed: (){}, child: Row(
+                                          children: [
+                                            
+                                          ],
+                                         ),)
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
                             );
                           });
