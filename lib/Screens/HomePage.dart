@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           toolbarHeight: 75,
           elevation: 0,
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: const Color(0xFF1856F5),
           leadingWidth: 120,
           leading: Row(
             children: [
@@ -198,79 +198,152 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 // new search buttom
-                child: Container(
-                  color: Colors.lightBlue,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return SizedBox(
-                              height: 400,
-                              child: Center(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                    color: Colors.white,
-                                    child: Column(
-                                      
-                                      children: [
-                                        
-                                        Row(
-                                          children: [
-                                            IconButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context);
-                                                },
-                                                icon: Icon(
-                                                  Icons.close,
-                                                  color: Colors.black,
-                                                )),
-                                            SizedBox(
-                                              width: 150,
-                                            ),
-                                            Text(
-                                              'البحث عن الصفحه',
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 22),
-                                            )
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              "اكتب هنا رقم الصفحه بالغه الانجليزيه ",
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.grey,
-                                              ),
-                                            )
-                                         TextButton(onPressed: (){}, child: Row(
-                                          children: [
-                                            
-                                          ],
-                                         ),)
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          });
-                    },
-                    child: const Icon(
-                      Icons.search,
-                    ),
-                  ),
+                child: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    openDialogToPage();
+
+                    //   showModalBottomSheet(
+                    //       backgroundColor: Colors.white,
+                    //       context: context,
+                    //       builder: (BuildContext context) {
+                    //         return SizedBox(
+                    //           height: 300,
+                    //           child: Center(
+                    //             child: ElevatedButton(
+                    //               onPressed: () {
+                    //                 Navigator.pop(context);
+                    //               },
+                    //               child: Container(
+                    //                 color: Colors.white,
+                    //                 child: Column(
+                    //                   children: [
+                    //                     Row(
+                    //                       children: [
+                    //                         IconButton(
+                    //                             onPressed: () {
+                    //                               Navigator.pop(context);
+                    //                             },
+                    //                             icon: const Icon(
+                    //                               Icons.close,
+                    //                               color: Colors.black,
+                    //                             )),
+                    //                         const SizedBox(
+                    //                           width: 150,
+                    //                         ),
+                    //                         Container(
+                    //                           alignment: Alignment.centerRight,
+                    //                           child: const Text(
+                    //                             '   البحث عن الصفحه',
+                    //                             style: TextStyle(
+                    //                                 color: Colors.black,
+                    //                                 fontWeight: FontWeight.bold,
+                    //                                 fontSize: 22),
+                    //                           ),
+                    //                         )
+                    //                       ],
+                    //                     ),
+                    //                     const SizedBox(
+                    //                       height: 10,
+                    //                     ),
+                    //                     const Row(
+                    //                       children: [
+                    //                         Text(
+                    //                           "اكتب هنا رقم الصفحه بالغه الانجليزيه ",
+                    //                           style: TextStyle(
+                    //                             fontSize: 20,
+                    //                             color: Colors.grey,
+                    //                           ),
+                    //                         ),
+                    //                       ],
+                    //                     ),
+
+                    //                     //   Row(
+                    //                     //     children: [
+                    //                     //       Container(
+                    //                     //         margin: const EdgeInsets.all(50),
+                    //                     //         padding: const EdgeInsets.all(5),
+                    //                     //         decoration: BoxDecoration(
+                    //                     //             color: Colors.blueAccent,
+                    //                     //             borderRadius:
+                    //                     //                 BorderRadius.circular(
+                    //                     //                     10.0)),
+                    //                     //         child: const Row(
+                    //                     //           children: [
+                    //                     //             Icon(
+                    //                     //               Icons.search,
+                    //                     //               color: Colors.black,
+                    //                     //             ),
+                    //                     //             SizedBox(
+                    //                     //               width: 3,
+                    //                     //             ),
+                    //                     //             Text(
+                    //                     //               "ابحث",
+                    //                     //               style: TextStyle(
+                    //                     //                   color: Colors.black),
+                    //                     //             ),
+                    //                     //           ],
+                    //                     //         ),
+                    //                     //       ),
+                    //                     //       const SizedBox(
+                    //                     //         width: 10,
+                    //                     //       ),
+                    //                     //       Container(
+                    //                     //         // autogroupfbd1pHD (HzPZULjyznUiVFjgEfbd1)
+                    //                     //         margin: const EdgeInsets.fromLTRB(
+                    //                     //             0, 0, 17, 0),
+                    //                     //         padding: const EdgeInsets.fromLTRB(
+                    //                     //             22, 13, 26, 13),
+                    //                     //         width: 120,
+                    //                     //         height: double.infinity,
+                    //                     //         decoration: BoxDecoration(
+                    //                     //           color: const Color(0xff1856f5),
+                    //                     //           borderRadius:
+                    //                     //               BorderRadius.circular(25),
+                    //                     //         ),
+                    //                     //       ),
+
+                    //                     //       // Container(
+                    //                     //       //   margin: const EdgeInsets.all(5),
+                    //                     //       //   padding: const EdgeInsets.all(5),
+                    //                     //       //   decoration: BoxDecoration(
+                    //                     //       //       color: Colors.blueAccent,
+                    //                     //       //       borderRadius:
+                    //                     //       //           BorderRadius.circular(
+                    //                     //       //               10.0)),
+                    //                     //       //   child: const TextField(
+                    //                     //       //     keyboardType:
+                    //                     //       //         TextInputType.number,
+                    //                     //       //     autofocus: true,
+                    //                     //       //     decoration: InputDecoration(
+                    //                     //       //       hintText: ' رقم الصفحة',
+                    //                     //       //     ),
+                    //                     //       //     style: TextStyle(
+                    //                     //       //         color: Colors.black),
+                    //                     //       //  ),
+                    //                     //       //   TextField(
+                    //                     //       //     keyboardType:
+                    //                     //       //         TextInputType.number,
+                    //                     //       //     onChanged: (data) {
+                    //                     //       //       pageNumber = int.parse(data);
+                    //                     //       //     },
+                    //                     //       //     // keyboardType: TextInputType.number,
+                    //                     //       //     autofocus: true,
+                    //                     //       //     decoration: const InputDecoration(
+                    //                     //       //       hintText: ' رقم الصفحة',
+                    //                     //       //     ),
+                    //                     //       //   ),
+                    //                     //       // ),
+                    //                     //     ],
+                    //                     //   ),
+                    //                   ],
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         );
+                    //       });
+                  },
                 ),
 
                 // child: IconButton(
@@ -311,223 +384,249 @@ class _HomePageState extends State<HomePage> {
               )),
         ),
         drawer: Drawer(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
+            backgroundColor: const Color(0xFF1856F5),
+            child: Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('images/za3rafaakter.png'))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Divider(
-                    height: 30,
-                  ),
                   Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                        color: Colors.blue.shade200,
-                        shape: BoxShape.rectangle,
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10))),
-                    child: TextButton(
-                        onPressed: () {
-                          // Then close the drawer
-                          Navigator.pop(context);
+                    padding:
+                        const EdgeInsets.only(left: 10, bottom: 10, right: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Divider(
+                          height: 30,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(2),
+                          decoration: const BoxDecoration(
+                              color: Color(0xFF2F80ED),
+                              shape: BoxShape.rectangle,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30))),
+                          child: TextButton(
+                              onPressed: () {
+                                // Then close the drawer
+                                Navigator.pop(context);
 
-                          openDialogToBookmark();
-                        },
-                        child: const Text(
-                          'اضف الي المفضلات',
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
-                        )),
-                  ),
-                  const Divider(),
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                          color: Colors.blue.shade200,
-                          shape: BoxShape.rectangle,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10))),
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'قائمة المفضلات : ',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          )),
+                                openDialogToBookmark();
+                              },
+                              child: const Text(
+                                'اضف الي المفضلات',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              )),
+                        ),
+                        const Divider(),
+                        Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.all(2),
+                            decoration: const BoxDecoration(
+                                color: Color(0xFF2F80ED),
+                                shape: BoxShape.rectangle,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            child: TextButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  'قائمة المفضلات : ',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                )),
+                          ),
+                        ),
+                        const Divider(),
+                      ],
                     ),
                   ),
-                  const Divider(),
+                  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Expanded(
+                      child: ListView.separated(
+                        padding:
+                            const EdgeInsets.only(left: 10, top: 0, right: 10),
+                        itemCount: ziad.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: const BoxDecoration(
+                                color: Color(0xFF2F80ED),
+                                shape: BoxShape.rectangle,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            child: ListTile(
+                              onLongPress: () {
+                                openDialogToDeleteBookmark(index);
+                              },
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${index + 1} - '
+                                    'اسم المفضلة : ${ziad.getAt(index)[1]}',
+                                    style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    'رقم الصفحة : ${ziad.getAt(index)[2]}',
+                                    style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    'التاريخ :${ziad.getAt(index)[3]}',
+                                    style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                              selected: _selectedIndex == index,
+                              onTap: () {
+                                // Update the state of the app
+                                _onItemFavoriteTapped(
+                                    int.parse(ziad.getAt(index)[2]));
+
+                                // Then close the drawer
+                                Navigator.pop(context);
+                              },
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const Divider(),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ),
-            Directionality(
-              textDirection: TextDirection.rtl,
-              child: Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.only(left: 10, top: 0, right: 10),
-                  itemCount: ziad.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                          color: Colors.blue.shade100,
-                          shape: BoxShape.rectangle,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40),
-                              bottomRight: Radius.circular(40))),
-                      child: ListTile(
-                        onLongPress: () {
-                          openDialogToDeleteBookmark(index);
-                        },
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${index + 1} - '
-                              'اسم المفضلة : ${ziad.getAt(index)[1]}',
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'رقم الصفحة : ${ziad.getAt(index)[2]}',
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              'التاريخ :${ziad.getAt(index)[3]}',
-                              style: const TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        selected: _selectedIndex == index,
-                        onTap: () {
-                          // Update the state of the app
-                          _onItemFavoriteTapped(
-                              int.parse(ziad.getAt(index)[2]));
-
-                          // Then close the drawer
-                          Navigator.pop(context);
-                        },
-                      ),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(),
-                ),
-              ),
-            ),
-          ],
-        )),
+            )),
         endDrawer: Directionality(
           textDirection: TextDirection.rtl,
           child: Drawer(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
+              backgroundColor: const Color(0xFF1856F5),
+              child: Container(
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('images/za3rafaakter.png'))),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Divider(
-                      height: 30,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                          color: Colors.blue.shade200,
-                          shape: BoxShape.rectangle,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10))),
-                      child: TextButton(
-                          onPressed: () {
-                            _pdfViewerController.jumpToPage(17);
-                            Navigator.pop(context);
-                          },
-                          child: const Text(
-                            'نبذة عن الكتاب',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: SizedBox(
+                          height: 100,
+                          child: Image(
+                            height: 100,
+                            image: AssetImage('images/sidemenupic.png'),
                           )),
                     ),
-                    const Divider(),
                     Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                          color: Colors.blue.shade200,
-                          shape: BoxShape.rectangle,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10))),
-                      child: TextButton(
-                          onPressed: () {
-                            _pdfViewerController.jumpToPage(1019);
-                            // Then close the drawer
-                            Navigator.pop(context);
-                          },
-                          child: const Text(
-                            'فهرس الموضوعات',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          )),
+                      padding: const EdgeInsets.only(
+                          left: 50, bottom: 10, right: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const Divider(
+                            height: 30,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: const BoxDecoration(
+                                color: Color(0xFF2F80ED),
+                                shape: BoxShape.rectangle,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            child: TextButton(
+                                onPressed: () {
+                                  _pdfViewerController.jumpToPage(17);
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  'نبذة عن الكتاب',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                )),
+                          ),
+                          const Divider(),
+                          Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: const BoxDecoration(
+                                color: Color(0xFF2F80ED),
+                                shape: BoxShape.rectangle,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            child: TextButton(
+                                onPressed: () {
+                                  _pdfViewerController.jumpToPage(1019);
+                                  // Then close the drawer
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  'فهرس الموضوعات',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                )),
+                          ),
+                          const Divider(),
+                        ],
+                      ),
                     ),
-                    const Divider(),
+                    Expanded(
+                      child: ListView.separated(
+                        padding:
+                            const EdgeInsets.only(left: 50, top: 0, right: 10),
+                        itemCount: getChapterNumbers(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF2f80ED),
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(30),
+                              ),
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                '${index + 1}. ${getChapterName()[index]}',
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              selected: _selectedIndex == index,
+                              onTap: () {
+                                // Update the state of the app
+                                _onItemTapped(index);
+                                // Then close the drawer
+                                Navigator.pop(context);
+                              },
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const Divider(),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.only(left: 10, top: 0, right: 10),
-                  itemCount: getChapterNumbers(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                          color: Colors.blue.shade100,
-                          shape: BoxShape.rectangle,
-                          borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40),
-                              bottomRight: Radius.circular(40))),
-                      child: ListTile(
-                        title: Text(
-                          '${index + 1} - ${getChapterName()[index]}',
-                          style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
-                        ),
-                        selected: _selectedIndex == index,
-                        onTap: () {
-                          // Update the state of the app
-                          _onItemTapped(index);
-                          // Then close the drawer
-                          Navigator.pop(context);
-                        },
-                      ),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const Divider(),
-                ),
-              ),
-            ],
-          )),
+              )),
         ),
         body: Stack(children: [
           Directionality(
@@ -581,7 +680,7 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.bottomLeft,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.lightBlue,
+                      color: const Color(0xFF1856F5),
                       borderRadius: BorderRadius.circular(30)),
                   // color: Colors.red,
                   width: 110,
@@ -620,7 +719,7 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.bottomRight,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.lightBlue,
+                      color: const Color(0xFF1856F5),
                       borderRadius: BorderRadius.circular(30)),
                   // color: Colors.red,
                   width: 110,
@@ -711,7 +810,7 @@ class _HomePageState extends State<HomePage> {
           // keyboardType: TextInputType.number,
           autofocus: true,
           decoration: const InputDecoration(
-            hintText: ' رقم الصفحة',
+            hintText: '  رقم الصفحة',
           ),
         ),
         actions: [
