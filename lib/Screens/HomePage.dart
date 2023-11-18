@@ -223,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                   textDirection: TextDirection.rtl,
                   text: TextSpan(
                     style: DefaultTextStyle.of(context).style,
-                    children: <TextSpan>[
+                    children: const <TextSpan>[
                       TextSpan(
                           text: 'دليل المعاصرين \n',
                           style: TextStyle(
@@ -479,11 +479,12 @@ class _HomePageState extends State<HomePage> {
                                 '${index + 1}. ${getChapterName()[index]}',
                                 style: const TextStyle(
                                     fontFamily: 'Tajawal',
-                                    color: Colors.white,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
                               ),
                               selected: _selectedIndex == index,
+                              textColor: Colors.white,
+                              selectedColor: Colors.black,
                               onTap: () {
                                 // Update the state of the app
                                 _onItemTapped(index);
