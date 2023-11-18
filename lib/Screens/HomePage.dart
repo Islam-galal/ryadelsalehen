@@ -409,7 +409,18 @@ class _HomePageState extends State<HomePage> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           const Divider(
-                            height: 30,
+                            height: 10,
+                          ),
+                          const Text(
+                            ' عن الكتاب : ',
+                            style: TextStyle(
+                                fontFamily: 'Tajawal',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          const Divider(
+                            height: 5,
                           ),
                           Container(
                             padding: const EdgeInsets.all(2),
@@ -447,7 +458,7 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.pop(context);
                                 },
                                 child: const Text(
-                                  'فهرس الموضوعات',
+                                  'فهرس الكتاب',
                                   style: TextStyle(
                                       fontFamily: 'Tajawal',
                                       fontSize: 15,
@@ -456,6 +467,14 @@ class _HomePageState extends State<HomePage> {
                                 )),
                           ),
                           const Divider(),
+                          const Text(
+                            ' فهرس الموضوعات : ',
+                            style: TextStyle(
+                                fontFamily: 'Tajawal',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
                         ],
                       ),
                     ),
@@ -483,8 +502,6 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.bold),
                               ),
                               selected: _selectedIndex == index,
-                              //ziiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiizzzzzzzzzzzzzzziiiiiiii
-
                               textColor: Colors.white,
                               selectedColor: Colors.black,
                               onTap: () {
