@@ -483,6 +483,8 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.bold),
                               ),
                               selected: _selectedIndex == index,
+                              //ziiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiizzzzzzzzzzzzzzziiiiiiii
+
                               textColor: Colors.white,
                               selectedColor: Colors.black,
                               onTap: () {
