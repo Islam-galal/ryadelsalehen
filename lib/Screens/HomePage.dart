@@ -1,7 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
 import 'package:share_plus/share_plus.dart';
@@ -202,147 +202,6 @@ class _HomePageState extends State<HomePage> {
                   icon: const Icon(Icons.search),
                   onPressed: () {
                     openDialogToPage();
-
-                    //   showModalBottomSheet(
-                    //       backgroundColor: Colors.white,
-                    //       context: context,
-                    //       builder: (BuildContext context) {
-                    //         return SizedBox(
-                    //           height: 300,
-                    //           child: Center(
-                    //             child: ElevatedButton(
-                    //               onPressed: () {
-                    //                 Navigator.pop(context);
-                    //               },
-                    //               child: Container(
-                    //                 color: Colors.white,
-                    //                 child: Column(
-                    //                   children: [
-                    //                     Row(
-                    //                       children: [
-                    //                         IconButton(
-                    //                             onPressed: () {
-                    //                               Navigator.pop(context);
-                    //                             },
-                    //                             icon: const Icon(
-                    //                               Icons.close,
-                    //                               color: Colors.black,
-                    //                             )),
-                    //                         const SizedBox(
-                    //                           width: 150,
-                    //                         ),
-                    //                         Container(
-                    //                           alignment: Alignment.centerRight,
-                    //                           child: const Text(
-                    //                             '   البحث عن الصفحه',
-                    //                             style: TextStyle(
-                    //                                 color: Colors.black,
-                    //                                 fontWeight: FontWeight.bold,
-                    //                                 fontSize: 22),
-                    //                           ),
-                    //                         )
-                    //                       ],
-                    //                     ),
-                    //                     const SizedBox(
-                    //                       height: 10,
-                    //                     ),
-                    //                     const Row(
-                    //                       children: [
-                    //                         Text(
-                    //                           "اكتب هنا رقم الصفحه بالغه الانجليزيه ",
-                    //                           style: TextStyle(
-                    //                             fontSize: 20,
-                    //                             color: Colors.grey,
-                    //                           ),
-                    //                         ),
-                    //                       ],
-                    //                     ),
-
-                    //                     //   Row(
-                    //                     //     children: [
-                    //                     //       Container(
-                    //                     //         margin: const EdgeInsets.all(50),
-                    //                     //         padding: const EdgeInsets.all(5),
-                    //                     //         decoration: BoxDecoration(
-                    //                     //             color: Colors.blueAccent,
-                    //                     //             borderRadius:
-                    //                     //                 BorderRadius.circular(
-                    //                     //                     10.0)),
-                    //                     //         child: const Row(
-                    //                     //           children: [
-                    //                     //             Icon(
-                    //                     //               Icons.search,
-                    //                     //               color: Colors.black,
-                    //                     //             ),
-                    //                     //             SizedBox(
-                    //                     //               width: 3,
-                    //                     //             ),
-                    //                     //             Text(
-                    //                     //               "ابحث",
-                    //                     //               style: TextStyle(
-                    //                     //                   color: Colors.black),
-                    //                     //             ),
-                    //                     //           ],
-                    //                     //         ),
-                    //                     //       ),
-                    //                     //       const SizedBox(
-                    //                     //         width: 10,
-                    //                     //       ),
-                    //                     //       Container(
-                    //                     //         // autogroupfbd1pHD (HzPZULjyznUiVFjgEfbd1)
-                    //                     //         margin: const EdgeInsets.fromLTRB(
-                    //                     //             0, 0, 17, 0),
-                    //                     //         padding: const EdgeInsets.fromLTRB(
-                    //                     //             22, 13, 26, 13),
-                    //                     //         width: 120,
-                    //                     //         height: double.infinity,
-                    //                     //         decoration: BoxDecoration(
-                    //                     //           color: const Color(0xff1856f5),
-                    //                     //           borderRadius:
-                    //                     //               BorderRadius.circular(25),
-                    //                     //         ),
-                    //                     //       ),
-
-                    //                     //       // Container(
-                    //                     //       //   margin: const EdgeInsets.all(5),
-                    //                     //       //   padding: const EdgeInsets.all(5),
-                    //                     //       //   decoration: BoxDecoration(
-                    //                     //       //       color: Colors.blueAccent,
-                    //                     //       //       borderRadius:
-                    //                     //       //           BorderRadius.circular(
-                    //                     //       //               10.0)),
-                    //                     //       //   child: const TextField(
-                    //                     //       //     keyboardType:
-                    //                     //       //         TextInputType.number,
-                    //                     //       //     autofocus: true,
-                    //                     //       //     decoration: InputDecoration(
-                    //                     //       //       hintText: ' رقم الصفحة',
-                    //                     //       //     ),
-                    //                     //       //     style: TextStyle(
-                    //                     //       //         color: Colors.black),
-                    //                     //       //  ),
-                    //                     //       //   TextField(
-                    //                     //       //     keyboardType:
-                    //                     //       //         TextInputType.number,
-                    //                     //       //     onChanged: (data) {
-                    //                     //       //       pageNumber = int.parse(data);
-                    //                     //       //     },
-                    //                     //       //     // keyboardType: TextInputType.number,
-                    //                     //       //     autofocus: true,
-                    //                     //       //     decoration: const InputDecoration(
-                    //                     //       //       hintText: ' رقم الصفحة',
-                    //                     //       //     ),
-                    //                     //       //   ),
-                    //                     //       // ),
-                    //                     //     ],
-                    //                     //   ),
-                    //                   ],
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ),
-                    //         );
-                    //       });
                   },
                 ),
 
@@ -361,12 +220,14 @@ class _HomePageState extends State<HomePage> {
               child: Center(
                 widthFactor: 120,
                 child: RichText(
+                  textDirection: TextDirection.rtl,
                   text: TextSpan(
                     style: DefaultTextStyle.of(context).style,
-                    children: const <TextSpan>[
+                    children: <TextSpan>[
                       TextSpan(
                           text: 'دليل المعاصرين \n',
                           style: TextStyle(
+                            fontFamily: 'Tajawal',
                             fontSize: 20,
                             decoration: TextDecoration.none,
                             color: Colors.white,
@@ -375,6 +236,7 @@ class _HomePageState extends State<HomePage> {
                       TextSpan(
                           text: 'شرح رياض الصالحين',
                           style: TextStyle(
+                              fontFamily: 'Tajawal',
                               fontSize: 17,
                               decoration: TextDecoration.none,
                               color: Colors.white))
@@ -387,8 +249,10 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: const Color(0xFF1856F5),
             child: Container(
               decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('images/za3rafaakter.png'))),
+                image: DecorationImage(
+                  image: AssetImage('images/za3rafaakter.png'),
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -418,6 +282,7 @@ class _HomePageState extends State<HomePage> {
                               child: const Text(
                                 'اضف الي المفضلات',
                                 style: TextStyle(
+                                    fontFamily: 'Tajawal',
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white),
@@ -439,6 +304,7 @@ class _HomePageState extends State<HomePage> {
                                 child: const Text(
                                   'قائمة المفضلات : ',
                                   style: TextStyle(
+                                      fontFamily: 'Tajawal',
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
@@ -475,18 +341,21 @@ class _HomePageState extends State<HomePage> {
                                     '${index + 1} - '
                                     'اسم المفضلة : ${ziad.getAt(index)[1]}',
                                     style: const TextStyle(
+                                        fontFamily: 'Tajawal',
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     'رقم الصفحة : ${ziad.getAt(index)[2]}',
                                     style: const TextStyle(
+                                        fontFamily: 'Tajawal',
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     'التاريخ :${ziad.getAt(index)[3]}',
                                     style: const TextStyle(
+                                        fontFamily: 'Tajawal',
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -556,6 +425,7 @@ class _HomePageState extends State<HomePage> {
                                 child: const Text(
                                   'نبذة عن الكتاب',
                                   style: TextStyle(
+                                      fontFamily: 'Tajawal',
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
@@ -578,6 +448,7 @@ class _HomePageState extends State<HomePage> {
                                 child: const Text(
                                   'فهرس الموضوعات',
                                   style: TextStyle(
+                                      fontFamily: 'Tajawal',
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
@@ -606,6 +477,7 @@ class _HomePageState extends State<HomePage> {
                               title: Text(
                                 '${index + 1}. ${getChapterName()[index]}',
                                 style: const TextStyle(
+                                    fontFamily: 'Tajawal',
                                     color: Colors.white,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
@@ -680,7 +552,7 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.bottomLeft,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: const Color(0xFF1856F5),
+                      color: const Color(0xFFDCE6FD),
                       borderRadius: BorderRadius.circular(30)),
                   // color: Colors.red,
                   width: 110,
@@ -690,16 +562,17 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Icon(
                         Icons.arrow_back_ios_new_outlined,
-                        color: Colors.white,
+                        color: Color(0xFF1856F5),
                         size: 20,
                       ),
                       SizedBox(
-                        width: 10,
+                        width: 5,
                       ),
                       Text(
-                        'السابق',
+                        'السابق ',
                         style: TextStyle(
-                            color: Colors.white,
+                            fontFamily: 'Tajawal',
+                            color: Color(0xFF1856F5),
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
@@ -730,6 +603,7 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         'التالي',
                         style: TextStyle(
+                            fontFamily: 'Tajawal',
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
