@@ -342,6 +342,7 @@ class _HomePageState extends State<HomePage> {
                                     'اسم المفضلة : ${ziad.getAt(index)[1]}',
                                     style: const TextStyle(
                                         fontFamily: 'Tajawal',
+                                        color: Colors.white,
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
                                   ),
