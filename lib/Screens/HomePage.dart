@@ -339,6 +339,7 @@ class _HomePageState extends State<HomePage> {
                                     style: const TextStyle(
                                         fontFamily: 'Tajawal',
                                         fontSize: 15,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
@@ -346,6 +347,7 @@ class _HomePageState extends State<HomePage> {
                                     style: const TextStyle(
                                         fontFamily: 'Tajawal',
                                         fontSize: 15,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
