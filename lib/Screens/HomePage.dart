@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:share_files_and_screenshot_widgets/share_files_and_screenshot_widgets.dart';
 import 'package:share_plus/share_plus.dart';
@@ -280,7 +279,7 @@ class _HomePageState extends State<HomePage> {
                                 openDialogToBookmark();
                               },
                               child: const Text(
-                                'اضف الي المفضلات',
+                                '+ اضف الصفحه الحاليه الي المفضلات',
                                 style: TextStyle(
                                     fontFamily: 'Tajawal',
                                     fontSize: 15,
@@ -289,29 +288,18 @@ class _HomePageState extends State<HomePage> {
                               )),
                         ),
                         const Divider(),
-                        Directionality(
+                        const Text(
+                          'قائمة المفضلات : ',
                           textDirection: TextDirection.rtl,
-                          child: Container(
-                            alignment: Alignment.centerRight,
-                            padding: const EdgeInsets.all(2),
-                            decoration: const BoxDecoration(
-                                color: Color(0xFF2F80ED),
-                                shape: BoxShape.rectangle,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            child: TextButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  'قائمة المفضلات : ',
-                                  style: TextStyle(
-                                      fontFamily: 'Tajawal',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                )),
-                          ),
+                          style: TextStyle(
+                              fontFamily: 'Tajawal',
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
                         ),
-                        const Divider(),
+                        const Divider(
+                          height: 10,
+                        ),
                       ],
                     ),
                   ),
