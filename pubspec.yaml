@@ -25,9 +25,9 @@ dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "images/new_logo_zizo.jpg"
+  image_path: "images/new_logo.jpeg"
   adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "images/logo_forground.png"
+  adaptive_icon_foreground: "images/logo_background1.png"
 
 
   flutter:
