@@ -20,6 +20,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^22.1.39
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  rename: ^3.0.1
 
 
 flutter_icons:
