@@ -457,6 +457,30 @@ class _HomePageState extends State<HomePage> {
                                 )),
                           ),
                           const Divider(),
+                          Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: const BoxDecoration(
+                                color: Color(0xFF2F80ED),
+                                shape: BoxShape.rectangle,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            child: TextButton(
+                                onPressed: () {
+                                  Share.share(
+                                      'كتاب دليل المعاصرين لشرح رياض الصالحين الذي اعتني به وقام بالتعليق علي أحاديثه وشرح أبوابه الشيخ محمد وسام الدين 📖 📖📖\nموجود معاك في اي مكان 🛜 🔛\n\nمستخدمين الآيفون  IOS برجاء الضغط علي  هذا الرابط   🔽🔛\n\nhttps://apps.apple.com/eg/app/%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D8%B5%D8%B1%D9%8A%D9%86/id6470870290 \n\nلمستخدمين سامسونج وباقي الاجهزه برجاء الضغط علي هذا الرابط  🔽🔛\n\nhttps://play.google.com/store/apps/details?id=com.RyadelSalehen.dalelElmoasereen&pcampaignid=web_share\n\n⿪⿪⿪شارك هذه الرساله مع كل من تحب في كل مكان في العالم وان شاء تكون صدقه جاريه لك باذن الله📖📖');
+                                  // Then close the drawer
+                                  Navigator.pop(context);
+                                },
+                                child: const Text(
+                                  'مشاركه البرنامج  مع الأصدقاء',
+                                  style: TextStyle(
+                                      fontFamily: 'Tajawal',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                )),
+                          ),
+                          const Divider(),
                           const Text(
                             ' فهرس الموضوعات : ',
                             style: TextStyle(
