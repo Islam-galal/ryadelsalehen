@@ -551,25 +551,29 @@ class _HomePageState extends State<HomePage> {
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: Center(
-                      child: SfPdfViewer.asset(
-                        'images/AllBook.pdf',
-                        key: _pdfViewerKey,
-                        canShowScrollHead: false,
-                        controller: _pdfViewerController,
-                        enableTextSelection: false,
-                        scrollDirection: PdfScrollDirection.horizontal,
-                        onPageChanged: (PdfPageChangedDetails details) {
-                          _currentPage = _pdfViewerController.pageNumber;
-                          saveIntegerToLocalStorage(
-                              'currentPage', _currentPage);
-                          setState(() {});
-                        },
-                        currentSearchTextHighlightColor:
-                            Colors.blue.withOpacity(0.6),
-                        otherSearchTextHighlightColor:
-                            Colors.blue.withOpacity(0.3),
-                        initialZoomLevel: _zoom,
-                        pageLayoutMode: PdfPageLayoutMode.single,
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: SfPdfViewer.asset(
+                          'images/AllBook.pdf',
+                          key: _pdfViewerKey,
+                          canShowScrollHead: false,
+                          pageSpacing: 1.5,
+                          controller: _pdfViewerController,
+                          enableTextSelection: false,
+                          scrollDirection: PdfScrollDirection.horizontal,
+                          onPageChanged: (PdfPageChangedDetails details) {
+                            _currentPage = _pdfViewerController.pageNumber;
+                            saveIntegerToLocalStorage(
+                                'currentPage', _currentPage);
+                            setState(() {});
+                          },
+                          currentSearchTextHighlightColor:
+                              Colors.blue.withOpacity(0.6),
+                          otherSearchTextHighlightColor:
+                              Colors.blue.withOpacity(0.3),
+                          initialZoomLevel: _zoom,
+                          pageLayoutMode: PdfPageLayoutMode.single,
+                        ),
                       ),
                     ),
                   ),
@@ -590,8 +594,8 @@ class _HomePageState extends State<HomePage> {
                       color: const Color(0xFFDCE6FD),
                       borderRadius: BorderRadius.circular(30)),
                   // color: Colors.red,
-                  width: 110,
-                  height: 50,
+                  width: 105,
+                  height: 45,
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -630,8 +634,8 @@ class _HomePageState extends State<HomePage> {
                       color: const Color(0xFF1856F5),
                       borderRadius: BorderRadius.circular(30)),
                   // color: Colors.red,
-                  width: 110,
-                  height: 50,
+                  width: 105,
+                  height: 45,
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
