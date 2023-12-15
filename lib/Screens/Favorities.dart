@@ -1,7 +1,10 @@
+// ignore_for_file: file_names, depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:ryadelsalehen/Widgets/FavoritiesWidget.dart';
 import 'package:hive_flutter/adapters.dart';
 
+// ignore: must_be_immutable
 class Favorites extends StatelessWidget {
   String id = 'Favorites';
   int boxlenght = 0;
@@ -26,19 +29,13 @@ class Favorites extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10, top: 0, right: 10),
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {
-                return   GestureDetector(
-                  onTap: (){
-
-                  },
+                return GestureDetector(
+                  onTap: () {},
                   child: FavoritiesWidget(
-
                       favoriteName: data.getAt(index)[1],
                       pageNumber: data.getAt(index)[2],
-                      dateAndTime: data.getAt(index)[3]
-
-                  ),
+                      dateAndTime: data.getAt(index)[3]),
                 );
-
               },
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),
