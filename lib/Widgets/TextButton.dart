@@ -1,7 +1,11 @@
+// ignore: depend_on_referenced_packages
+// ignore_for_file: file_names, depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 
 class ButtonField extends StatelessWidget {
-  ButtonField({super.key, 
+  ButtonField({
+    super.key,
     required this.text,
     required this.onPressed,
   });
@@ -13,7 +17,7 @@ class ButtonField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-       onPressed: (){},
+      onPressed: () {},
       child: Container(
         decoration: BoxDecoration(
           color: Colors.green,
