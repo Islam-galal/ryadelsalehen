@@ -42,8 +42,9 @@ class SyncfusionPdfViewerWidget extends StatelessWidget {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: Center(
-                child: SfPdfViewer.asset(
+                child: SfPdfViewer.asset  (
                   pdfPath,
+                  pageSpacing: 3,
                   key: pdfViewerKey,
                   canShowScrollHead: false,
                   controller: pdfViewerController,

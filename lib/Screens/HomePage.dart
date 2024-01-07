@@ -1,6 +1,9 @@
 // ignore: depend_on_referenced_packages
 // ignore_for_file: file_names, depend_on_referenced_packages, must_be_immutable, duplicate_ignore, no_logic_in_create_state
 
+import 'dart:io';
+
+// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ryadelsalehen/Screens/drawer.dart';
@@ -57,7 +60,24 @@ class _HomePageState extends State<HomePage> {
     textController = TextEditingController();
 
     super.initState();
+
+    //FirebaseCrashlytics.instance.crash();
   }
+
+
+  getFileFromAsset(String asset) {
+
+    return Stack(children: [
+          SyncfusionPdfViewerWidget(
+              pdfPath: asset,
+              zoom: _zoom,
+              padding: 10,
+              previewContainer: previewContainer,
+              pdfViewerKey: _pdfViewerKey,
+              pdfViewerController: _pdfViewerController,
+              currentPage: _currentPage)]
+
+  );}
 
   // -----------------------------SharedPreference-------------------------------
   Future<void> saveIntegerToLocalStorage(String key, int value) async {
@@ -108,14 +128,7 @@ class _HomePageState extends State<HomePage> {
             pdfViewerKey: _pdfViewerKey,
             pdfViewerController: _pdfViewerController),
         body: Stack(children: [
-          SyncfusionPdfViewerWidget(
-              pdfPath: 'images/AllBook.pdf',
-              zoom: _zoom,
-              padding: 10,
-              previewContainer: previewContainer,
-              pdfViewerKey: _pdfViewerKey,
-              pdfViewerController: _pdfViewerController,
-              currentPage: _currentPage),
+          getFileFromAsset('images/AllBook.pdf'),
           ScrollButton(
               direction: 'LEFT', onPressed: _pdfViewerController, padding: 20),
           ScrollButton(
